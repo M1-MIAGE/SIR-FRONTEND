@@ -95,25 +95,48 @@
   color: var(--text-color-secondary);
 }
 
-.auth-login-page {
+.auth-login-page,
+.auth-register-page {
   min-height: min(80dvh, 44rem);
   display: grid;
   place-items: center;
   padding: var(--space-4);
 }
 
-.auth-login-card {
-  width: min(28rem, 100%);
+.auth-login-card,
+.auth-register-card {
+  width: min(32rem, 100%);
 }
 
-.auth-login-content {
+.auth-login-content,
+.auth-register-content {
   display: grid;
   gap: var(--space-3);
 }
 
+.auth-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.auth-field .p-error {
+  font-size: 0.85rem;
+}
+
 .auth-login-content .p-inputtext,
-.auth-login-content .p-password {
+.auth-login-content .p-password,
+.auth-register-content .p-inputtext,
+.auth-register-content .p-password {
   width: 100%;
+}
+
+.auth-role-select {
+  display: flex;
+}
+
+.auth-role-select .p-button {
+  flex: 1;
+  justify-content: center;
 }
 
 .error-view {
@@ -182,8 +205,13 @@
     gap: var(--space-2);
   }
 
-  .auth-login-card {
+  .auth-login-card,
+  .auth-register-card {
     width: 100%;
+  }
+
+  .auth-role-select {
+    flex-direction: column;
   }
 
   .error-actions .p-button {

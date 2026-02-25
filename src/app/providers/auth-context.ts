@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import type { LoginRequestDto } from '@/features/auth/model/auth.types'
+import type { CreateUserRequestDto, LoginRequestDto } from '@/features/auth/model/auth.types'
 import type { Role } from '@/entities/user/model/role'
 import type { AppUser } from '@/entities/user/model/user'
 import type { ApiErrorCode } from '@/shared/api/map-api-error'
@@ -12,6 +12,7 @@ export type AuthContextValue = {
   bootstrapErrorCode: ApiErrorCode | null
   refreshSession: () => Promise<void>
   login: (credentials: LoginRequestDto) => Promise<void>
+  register: (payload: CreateUserRequestDto) => Promise<void>
   logout: () => Promise<void>
 }
 

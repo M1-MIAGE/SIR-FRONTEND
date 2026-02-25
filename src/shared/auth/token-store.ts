@@ -1,13 +1,19 @@
 import type { TokenPairResponseDto } from '@/features/auth/model/auth.types'
 
-let tokenPair: TokenPairResponseDto | null = null
+type AccessTokenState = Pick<TokenPairResponseDto, 'accessToken' | 'tokenType' | 'accessTokenExpiresAt'>
+
+let accessTokenState: AccessTokenState | null = null
 
 export const authTokenStore = {
-  get: (): TokenPairResponseDto | null => tokenPair,
+  get: (): AccessTokenState | null => accessTokenState,
   set: (nextTokenPair: TokenPairResponseDto): void => {
-    tokenPair = nextTokenPair
+    accessTokenState = {
+      accessToken: nextTokenPair.accessToken,
+      tokenType: nextTokenPair.tokenType,
+      accessTokenExpiresAt: nextTokenPair.accessTokenExpiresAt,
+    }
   },
   clear: (): void => {
-    tokenPair = null
+    accessTokenState = null
   },
 } as const

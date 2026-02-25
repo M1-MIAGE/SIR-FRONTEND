@@ -11,5 +11,6 @@ export const API_ENDPOINTS = {
   },
   USERS: {
     ME: `/${API_SEGMENTS.USERS}/me`,
-  }
+    REGISTER: `/${API_SEGMENTS.USERS}/register`,
+  },
 } as const

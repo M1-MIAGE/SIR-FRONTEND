@@ -8,6 +8,7 @@ import RoleGuard from '@/shared/lib/guards/RoleGuard'
 import type { ColorMode } from '@/features/theme/toggle-theme/model/theme'
 import AdminHomePage from '@/pages/admin/AdminHomePage'
 import LoginPage from '@/pages/auth/LoginPage'
+import RegisterPage from '@/pages/auth/RegisterPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
 import OrganizerHomePage from '@/pages/organizer/OrganizerHomePage'
@@ -26,6 +27,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
         {
           path: ROUTE_SEGMENTS.LOGIN,
           element: <LoginPage />,
+        },
+        {
+          path: ROUTE_SEGMENTS.REGISTER,
+          element: <RegisterPage />,
         },
         {
           path: ROUTE_SEGMENTS.CUSTOMER,

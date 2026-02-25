@@ -1,9 +1,15 @@
 import {
+  createUserRequestSchema,
   currentUserResponseSchema,
   loginRequestSchema,
+  refreshTokenRequestSchema,
+  responseUserSchema,
   tokenPairResponseSchema,
+  type CreateUserRequestDto,
   type CurrentUserResponseDto,
   type LoginRequestDto,
+  type RefreshTokenRequestDto,
+  type ResponseUserDto,
   type TokenPairResponseDto,
 } from '@/features/auth/model/auth.types'
 import { BACKEND_ROLE_TO_ROLE } from '@/entities/user/model/role'
@@ -28,6 +34,18 @@ export const authApi = {
     return tokenPairResponseSchema.parse(data)
   },
 
+  async register(input: CreateUserRequestDto): Promise<ResponseUserDto> {
+    const payload = createUserRequestSchema.parse(input)
+    const { data } = await http.post(API_ENDPOINTS.USERS.REGISTER, payload)
+    return responseUserSchema.parse(data)
+  },
+
+  async refresh(input?: RefreshTokenRequestDto): Promise<TokenPairResponseDto> {
+    const payload = input ? refreshTokenRequestSchema.parse(input) : {}
+    const { data } = await http.post(API_ENDPOINTS.AUTH.REFRESH, payload)
+    return tokenPairResponseSchema.parse(data)
+  },
+
   async me(): Promise<AppUser> {
     const { data } = await http.get(API_ENDPOINTS.USERS.ME)
     const parsed = currentUserResponseSchema.parse(data)
@@ -35,6 +53,6 @@ export const authApi = {
   },
 
   async logout(): Promise<void> {
-    await http.post(API_ENDPOINTS.AUTH.LOGOUT)
+    await http.post(API_ENDPOINTS.AUTH.LOGOUT, {})
   },
 }

@@ -17,18 +17,40 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setBootstrapErrorCode(null)
 
     try {
-      const authenticatedUser = await authApi.me()
-      setUser(authenticatedUser)
-    } catch (error) {
-      const mappedCode = mapApiErrorCode(error)
+      try {
+        const authenticatedUser = await authApi.me()
+        setUser(authenticatedUser)
+        return
+      } catch (error) {
+        const mappedCode = mapApiErrorCode(error)
+        if (mappedCode !== ERROR_CODES.UNAUTHORIZED) {
+          setBootstrapErrorCode(mappedCode)
+          return
+        }
+      }
 
-      if (mappedCode === ERROR_CODES.UNAUTHORIZED) {
+      try {
+        const refreshedTokenPair = await authApi.refresh()
+        authTokenStore.set(refreshedTokenPair)
+      } catch {
         authTokenStore.clear()
         setUser(null)
         return
       }
 
-      setBootstrapErrorCode(mappedCode)
+      try {
+        const authenticatedUser = await authApi.me()
+        setUser(authenticatedUser)
+      } catch (error) {
+        const mappedCode = mapApiErrorCode(error)
+        if (mappedCode === ERROR_CODES.UNAUTHORIZED) {
+          authTokenStore.clear()
+          setUser(null)
+          return
+        }
+
+        setBootstrapErrorCode(mappedCode)
+      }
     } finally {
       setIsLoading(false)
     }
@@ -41,6 +63,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
     authTokenStore.set(tokenPair)
 
     await refreshSession()
+  }
+
+  const register: AuthContextValue['register'] = async (payload) => {
+    setBootstrapErrorCode(null)
+    await authApi.register(payload)
   }
 
   const logout: AuthContextValue['logout'] = async () => {
@@ -65,6 +92,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     bootstrapErrorCode,
     refreshSession,
     login,
+    register,
     logout,
   }
 
