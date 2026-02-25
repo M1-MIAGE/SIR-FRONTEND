@@ -184,6 +184,295 @@
   flex-wrap: wrap;
 }
 
+.public-home {
+  min-height: 100dvh;
+  color: #e2e8f0;
+  background:
+    radial-gradient(circle at 20% -20%, rgb(245 158 11 / 0.2), transparent 35%),
+    radial-gradient(circle at 85% 10%, rgb(14 165 233 / 0.16), transparent 30%),
+    #020617;
+}
+
+.public-home-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: var(--space-3) var(--space-4);
+}
+
+.public-home-header .p-menubar {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  border: 1px solid rgb(148 163 184 / 0.2);
+  background: rgb(2 6 23 / 0.78);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+}
+
+.public-home-brand {
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #f8fafc;
+}
+
+.public-home-menubar-end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.public-home-main {
+  display: grid;
+  gap: var(--space-5);
+  padding-bottom: var(--space-5);
+}
+
+.public-home-hero {
+  position: relative;
+  overflow: hidden;
+  width: min(100% - 2rem, var(--layout-max-width));
+  margin-inline: auto;
+  border-radius: 1.5rem;
+  min-height: min(80dvh, 52rem);
+  background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  isolation: isolate;
+}
+
+.public-home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgb(2 6 23 / 0.88), rgb(2 6 23 / 0.7)),
+    linear-gradient(0deg, rgb(2 6 23 / 0.85), transparent 55%);
+}
+
+.public-home-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin-inline: auto;
+  text-align: center;
+  padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 4vw, 3rem);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.public-home-hero-chip {
+  justify-self: center;
+}
+
+.public-home-hero-title {
+  margin: 0;
+  font-size: clamp(2rem, 1.2rem + 3vw, 4.5rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.public-home-hero-title span {
+  display: block;
+  color: #f59e0b;
+}
+
+.public-home-hero-subtitle {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
+}
+
+.public-home-search {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+  width: min(100%, 44rem);
+  margin-inline: auto;
+}
+
+.public-home-search-field .p-inputtext {
+  width: 100%;
+  background: rgb(15 23 42 / 0.78);
+  border-color: rgb(148 163 184 / 0.35);
+  color: #fff;
+}
+
+.public-home-search-field .p-inputtext::placeholder {
+  color: #94a3b8;
+}
+
+.public-home-genre-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.public-home-hero-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.public-home-section {
+  width: min(100% - 2rem, var(--layout-max-width));
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.public-home-section-muted {
+  padding: var(--space-4);
+  border: 1px solid rgb(148 163 184 / 0.2);
+  border-radius: 1rem;
+  background: rgb(15 23 42 / 0.45);
+}
+
+.public-home-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.public-home-section-head h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
+  color: #fff;
+}
+
+.public-home-section-head p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.public-home-section-head-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.public-home-events-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+}
+
+.public-home-event-card {
+  background: rgb(15 23 42 / 0.75);
+  border: 1px solid rgb(148 163 184 / 0.2);
+  color: #e2e8f0;
+}
+
+.public-home-event-card .p-card-body {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.public-home-event-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.public-home-event-card p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.public-home-event-price {
+  color: #f8fafc !important;
+  font-weight: 700;
+}
+
+.public-home-event-image-wrap {
+  position: relative;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  height: 10.5rem;
+}
+
+.public-home-event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.public-home-event-tag {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+}
+
+.public-home-genre-grid,
+.public-home-values-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.public-home-genre-card,
+.public-home-value-card {
+  background: rgb(15 23 42 / 0.75);
+  border: 1px solid rgb(148 163 184 / 0.2);
+  color: #e2e8f0;
+}
+
+.public-home-genre-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.public-home-value-card .p-card-body {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.public-home-value-card h3 {
+  margin: 0;
+  color: #fff;
+}
+
+.public-home-value-card p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.public-home-value-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.8rem;
+  display: grid;
+  place-items: center;
+  background: rgb(245 158 11 / 0.15);
+  color: #f59e0b;
+  font-size: 1.2rem;
+}
+
+.public-home-cta {
+  background: linear-gradient(135deg, rgb(217 119 6 / 0.95), rgb(245 158 11 / 0.85));
+  color: #fff;
+  border: 0;
+}
+
+.public-home-cta .p-card-body {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.public-home-cta h2,
+.public-home-cta p {
+  margin: 0;
+}
+
+.public-home-cta-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 @media (max-width: 575.98px) {
   .header-end {
     width: 100%;
@@ -217,5 +506,20 @@
   .error-actions .p-button {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .public-home-search {
+    grid-template-columns: 1fr;
+  }
+
+  .public-home-menubar-end {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .public-home-hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
   }
 }

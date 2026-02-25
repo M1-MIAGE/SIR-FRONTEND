@@ -51,7 +51,7 @@ export default function LoginPage() {
   }
 
   if (!isLoading && isAuthenticated) {
-    return <Navigate to={ROUTES.root()} replace />
+    return <Navigate to={ROUTES.dashboard()} replace />
   }
 
   const submit = handleSubmit(async (values) => {
@@ -59,7 +59,7 @@ export default function LoginPage() {
 
     try {
       await login(values)
-      navigate(ROUTES.root(), { replace: true })
+      navigate(ROUTES.dashboard(), { replace: true })
     } catch (error) {
       const apiErrorCode = mapApiErrorCode(error)
 

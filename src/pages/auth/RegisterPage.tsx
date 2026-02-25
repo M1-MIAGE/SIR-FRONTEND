@@ -50,7 +50,7 @@ export default function RegisterPage() {
   }
 
   if (!isLoading && isAuthenticated) {
-    return <Navigate to={ROUTES.root()} replace />
+    return <Navigate to={ROUTES.dashboard()} replace />
   }
 
   const submit = handleSubmit(async (values) => {

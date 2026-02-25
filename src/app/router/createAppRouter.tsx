@@ -11,6 +11,7 @@ import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
+import HomePage from '@/pages/home/HomePage'
 import OrganizerHomePage from '@/pages/organizer/OrganizerHomePage'
 import { ERROR_CODES, ROUTE_PATHS, ROUTE_SEGMENTS } from '@/shared/config/routes'
 
@@ -22,6 +23,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
       children: [
         {
           index: true,
+          element: <HomePage />,
+        },
+        {
+          path: ROUTE_SEGMENTS.DASHBOARD,
           element: <RoleHomeRedirect />,
         },
         {
