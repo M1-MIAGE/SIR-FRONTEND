@@ -1,0 +1,19 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.theme-card-container {
+  width: min(28rem, 100%);
+}
+
+.theme-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.theme-content .p-togglebutton {
+  width: 100%;
+}
