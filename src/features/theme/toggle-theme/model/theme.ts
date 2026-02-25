@@ -10,7 +10,7 @@ const getThemeUrl = (mode: ColorMode): string =>
 
 export const getInitialColorMode = (): ColorMode => {
   if (typeof window === 'undefined') {
-    return 'light'
+    return 'dark'
   }
 
   return window.matchMedia('(prefers-color-scheme: dark)').matches
