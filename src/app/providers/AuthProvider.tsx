@@ -1,6 +1,7 @@
-import { type PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import { type PropsWithChildren, useEffect, useState } from 'react'
 import { AuthContext, type AuthContextValue } from '@/app/providers/auth-context'
 import { authApi } from '@/features/auth/api/auth.api'
+import { authTokenStore } from '@/shared/auth/token-store'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES } from '@/shared/config/routes'
 import type { AppUser } from '@/entities/user/model/user'
@@ -22,6 +23,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const mappedCode = mapApiErrorCode(error)
 
       if (mappedCode === ERROR_CODES.UNAUTHORIZED) {
+        authTokenStore.clear()
         setUser(null)
         return
       }
@@ -32,10 +34,20 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }
 
+  const login: AuthContextValue['login'] = async (credentials) => {
+    setBootstrapErrorCode(null)
+
+    const tokenPair = await authApi.login(credentials)
+    authTokenStore.set(tokenPair)
+
+    await refreshSession()
+  }
+
   const logout: AuthContextValue['logout'] = async () => {
     try {
       await authApi.logout()
     } finally {
+      authTokenStore.clear()
       setUser(null)
       setBootstrapErrorCode(null)
     }
@@ -45,18 +57,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     void refreshSession()
   }, [])
 
-  const contextValue = useMemo<AuthContextValue>(
-    () => ({
-      user,
-      role: user?.role ?? null,
-      isAuthenticated: Boolean(user),
-      isLoading,
-      bootstrapErrorCode,
-      refreshSession,
-      logout,
-    }),
-    [user, isLoading, bootstrapErrorCode],
-  )
+  const contextValue: AuthContextValue = {
+    user,
+    role: user?.role ?? null,
+    isAuthenticated: Boolean(user),
+    isLoading,
+    bootstrapErrorCode,
+    refreshSession,
+    login,
+    logout,
+  }
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }

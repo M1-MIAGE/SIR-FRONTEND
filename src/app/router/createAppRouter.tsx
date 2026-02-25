@@ -7,6 +7,7 @@ import RoleHomeRedirect from '@/app/router/RoleHomeRedirect'
 import RoleGuard from '@/shared/lib/guards/RoleGuard'
 import type { ColorMode } from '@/features/theme/toggle-theme/model/theme'
 import AdminHomePage from '@/pages/admin/AdminHomePage'
+import LoginPage from '@/pages/auth/LoginPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
 import OrganizerHomePage from '@/pages/organizer/OrganizerHomePage'
@@ -21,6 +22,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
         {
           index: true,
           element: <RoleHomeRedirect />,
+        },
+        {
+          path: ROUTE_SEGMENTS.LOGIN,
+          element: <LoginPage />,
         },
         {
           path: ROUTE_SEGMENTS.CUSTOMER,

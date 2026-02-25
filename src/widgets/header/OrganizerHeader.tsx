@@ -3,6 +3,7 @@ import type { MenuItem } from 'primereact/menuitem'
 import { Tag } from 'primereact/tag'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import LogoutButton from '@/features/auth/logout/ui/LogoutButton'
 import type { ColorMode } from '@/features/theme/toggle-theme/model/theme'
 import ThemeToggle from '@/features/theme/toggle-theme/ui/ThemeToggle'
 import { ROUTES } from '@/shared/config/routes'
@@ -39,6 +40,7 @@ export default function OrganizerHeader({ initialColorMode }: OrganizerHeaderPro
           <div className="header-end">
             <Tag value="ORGANIZER" severity="info" />
             <ThemeToggle initialColorMode={initialColorMode} />
+            <LogoutButton />
           </div>
         }
       />

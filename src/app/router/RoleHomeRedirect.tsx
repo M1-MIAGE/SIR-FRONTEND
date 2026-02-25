@@ -15,7 +15,7 @@ export default function RoleHomeRedirect() {
   }
 
   if (!isAuthenticated || !role) {
-    return <Navigate to={ROUTES.errors.unauthorized()} replace />
+    return <Navigate to={ROUTES.login()} replace />
   }
 
   return <Navigate to={ROUTES.roleHome(role)} replace />

@@ -1,41 +1,36 @@
-import { z } from 'zod'
-import { ROLES } from '@/entities/user/model/role'
+import {
+  currentUserResponseSchema,
+  loginRequestSchema,
+  tokenPairResponseSchema,
+  type CurrentUserResponseDto,
+  type LoginRequestDto,
+  type TokenPairResponseDto,
+} from '@/features/auth/model/auth.types'
+import { BACKEND_ROLE_TO_ROLE } from '@/entities/user/model/role'
 import type { AppUser } from '@/entities/user/model/user'
 import { http } from '@/shared/api/http'
 import { API_ENDPOINTS } from '@/shared/config/api-routes'
 
-const authRoleSchema = z.enum(ROLES)
-
-const authUserResponseSchema = z.object({
-  id: z.union([z.string(), z.number()]).transform(String),
-  email: z.email(),
-  role: authRoleSchema,
-  firstName: z.string().trim().optional(),
-  lastName: z.string().trim().optional(),
-  fullName: z.string().trim().optional(),
-})
-
-const toAppUser = (raw: z.infer<typeof authUserResponseSchema>): AppUser => {
-  const fullNameParts = raw.fullName?.split(/\s+/).filter(Boolean) ?? []
-  const firstNameFromFullName = fullNameParts[0] ?? ''
-  const lastNameFromFullName = fullNameParts.slice(1).join(' ')
-
-  const firstName = raw.firstName || firstNameFromFullName || 'User'
-  const lastName = raw.lastName || lastNameFromFullName || firstName
-
+const toAppUser = (raw: CurrentUserResponseDto): AppUser => {
   return {
-    id: raw.id,
     email: raw.email,
-    role: raw.role,
-    firstName,
-    lastName,
+    firstName: raw.firstName,
+    lastName: raw.lastName,
+    role: BACKEND_ROLE_TO_ROLE[raw.role],
+    createdAt: raw.createdAt,
   }
 }
 
 export const authApi = {
+  async login(input: LoginRequestDto): Promise<TokenPairResponseDto> {
+    const payload = loginRequestSchema.parse(input)
+    const { data } = await http.post(API_ENDPOINTS.AUTH.LOGIN, payload)
+    return tokenPairResponseSchema.parse(data)
+  },
+
   async me(): Promise<AppUser> {
     const { data } = await http.get(API_ENDPOINTS.USERS.ME)
-    const parsed = authUserResponseSchema.parse(data)
+    const parsed = currentUserResponseSchema.parse(data)
     return toAppUser(parsed)
   },
 

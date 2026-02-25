@@ -21,7 +21,7 @@ export default function RoleGuard({ allow, children }: RoleGuardProps) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to={ROUTES.errors.unauthorized()} replace />
+    return <Navigate to={ROUTES.login()} replace />
   }
 
   if (!role || !allow.includes(role)) {

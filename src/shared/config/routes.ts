@@ -1,6 +1,7 @@
 import type { Role } from '@/entities/user/model/role'
 
 export const ROUTE_SEGMENTS = {
+  LOGIN: 'login',
   CUSTOMER: 'customer',
   ORGANIZER: 'organizer',
   ADMIN: 'admin',
@@ -9,6 +10,7 @@ export const ROUTE_SEGMENTS = {
 
 export const ROUTE_PATHS = {
   ROOT: '/',
+  LOGIN: `/${ROUTE_SEGMENTS.LOGIN}`,
   CUSTOMER_HOME: `/${ROUTE_SEGMENTS.CUSTOMER}`,
   ORGANIZER_HOME: `/${ROUTE_SEGMENTS.ORGANIZER}`,
   ADMIN_HOME: `/${ROUTE_SEGMENTS.ADMIN}`,
@@ -44,6 +46,7 @@ type ErrorCodeInput = KnownErrorCode | `${number}`
 
 export const ROUTES = {
   root: (): string => ROUTE_PATHS.ROOT,
+  login: (): string => ROUTE_PATHS.LOGIN,
   roleHome: (role: Role): string => {
     if (role === 'CUSTOMER') {
       return ROUTE_PATHS.CUSTOMER_HOME

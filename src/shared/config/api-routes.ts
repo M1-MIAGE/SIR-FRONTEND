@@ -5,8 +5,9 @@ const API_SEGMENTS = {
 
 export const API_ENDPOINTS = {
   AUTH: {
-    ME: `/${API_SEGMENTS.AUTH}/me`,
+    LOGIN: `/${API_SEGMENTS.AUTH}/login`,
     LOGOUT: `/${API_SEGMENTS.AUTH}/logout`,
+    REFRESH: `/${API_SEGMENTS.AUTH}/refresh`,
   },
   USERS: {
     ME: `/${API_SEGMENTS.USERS}/me`,
