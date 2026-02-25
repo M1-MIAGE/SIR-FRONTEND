@@ -3,8 +3,11 @@ import { Card } from 'primereact/card'
 import { Divider } from 'primereact/divider'
 import { Tag } from 'primereact/tag'
 import { ToggleButton } from 'primereact/togglebutton'
-import './App.css'
-import { applyTheme, type ColorMode } from '@/theme'
+import '@/app/styles/app.css'
+import {
+  applyTheme,
+  type ColorMode,
+} from '@/features/theme/toggle-theme/model/theme'
 
 type AppProps = {
   initialColorMode: ColorMode

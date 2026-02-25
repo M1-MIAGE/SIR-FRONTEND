@@ -3,9 +3,12 @@ import { createRoot } from 'react-dom/client'
 import { PrimeReactProvider } from 'primereact/api'
 import 'primeicons/primeicons.css'
 import 'primereact/resources/primereact.min.css'
-import './index.css'
-import App from '@/App'
-import { applyTheme, getInitialColorMode } from '@/theme'
+import '@/app/styles/index.css'
+import App from '@/app/App'
+import {
+  applyTheme,
+  getInitialColorMode,
+} from '@/features/theme/toggle-theme/model/theme'
 
 const initialColorMode = getInitialColorMode()
 
