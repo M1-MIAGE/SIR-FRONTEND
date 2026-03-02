@@ -43,11 +43,11 @@ export default function LoginPage() {
   const locationState = (location.state ?? null) as LoginLocationState | null
   const registerSuccessMessage =
     locationState?.registrationStatus === 'success'
-      ? `Compte cree pour ${locationState.registeredEmail ?? 'cet e-mail'}. Connecte-toi maintenant.`
+      ? `Compte créé pour ${locationState.registeredEmail ?? 'cet e-mail'}. Connecte-toi maintenant.`
       : null
 
   if (isLoading) {
-    return <AppLoader label="Checking session..." />
+    return <AppLoader label="Session de vérification..." />
   }
 
   if (!isLoading && isAuthenticated) {
@@ -133,7 +133,7 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            label="Login"
+            label="Connexion"
             icon="pi pi-sign-in"
             loading={isSubmitting}
           />

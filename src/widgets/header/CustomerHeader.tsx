@@ -1,12 +1,9 @@
-import { Menubar } from 'primereact/menubar'
 import type { MenuItem } from 'primereact/menuitem'
-import { Tag } from 'primereact/tag'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import LogoutButton from '@/features/auth/logout/ui/LogoutButton'
 import type { ColorMode } from '@/features/theme/toggle-theme/model/theme'
-import ThemeToggle from '@/features/theme/toggle-theme/ui/ThemeToggle'
 import { ROUTES } from '@/shared/config/routes'
+import FloatingHeader from '@/widgets/header/FloatingHeader'
 
 type CustomerHeaderProps = {
   initialColorMode: ColorMode
@@ -18,7 +15,12 @@ export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps
   const menuItems = useMemo<MenuItem[]>(
     () => [
       {
-        label: 'Espace Client',
+        label: 'Accueil',
+        icon: 'pi pi-compass',
+        command: () => navigate(ROUTES.root()),
+      },
+      {
+        label: 'Mon Espace',
         icon: 'pi pi-home',
         command: () => navigate(ROUTES.roleHome('CUSTOMER')),
       },
@@ -32,18 +34,11 @@ export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps
   )
 
   return (
-    <header className="role-header role-header--customer">
-      <Menubar
-        model={menuItems}
-        start={<span className="role-brand">SIR Customer</span>}
-        end={
-          <div className="header-end">
-            <Tag value="CUSTOMER" severity="success" />
-            <ThemeToggle initialColorMode={initialColorMode} />
-            <LogoutButton />
-          </div>
-        }
-      />
-    </header>
+    <FloatingHeader
+      brand="SIR Customer"
+      menuItems={menuItems}
+      initialColorMode={initialColorMode}
+      showLogout
+    />
   )
 }

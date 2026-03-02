@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ToggleButton } from 'primereact/togglebutton'
+import { Button } from 'primereact/button'
 import {
   applyTheme,
   type ColorMode,
@@ -12,6 +12,7 @@ type ThemeToggleProps = {
 export default function ThemeToggle({ initialColorMode }: ThemeToggleProps) {
   const [mode, setMode] = useState<ColorMode>(initialColorMode)
   const isDark = mode === 'dark'
+  const nextModeLabel = isDark ? 'Activer le mode clair' : 'Activer le mode sombre'
 
   useEffect(() => {
     applyTheme(mode)
@@ -19,14 +20,13 @@ export default function ThemeToggle({ initialColorMode }: ThemeToggleProps) {
 
   return (
     <div className="theme-toggle">
-      <ToggleButton
-        checked={isDark}
-        onLabel="Dark"
-        offLabel="Light"
-        onIcon="pi pi-moon"
-        offIcon="pi pi-sun"
-        onChange={(event) => setMode(event.value ? 'dark' : 'light')}
-        aria-label="Changer le theme"
+      <Button
+        type="button"
+        icon={isDark ? 'pi pi-moon' : 'pi pi-sun'}
+        rounded
+        text
+        aria-label={nextModeLabel}
+        onClick={() => setMode((currentMode) => (currentMode === 'dark' ? 'light' : 'dark'))}
       />
     </div>
   )

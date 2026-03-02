@@ -23,7 +23,7 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
       children: [
         {
           index: true,
-          element: <HomePage />,
+          element: <HomePage initialColorMode={initialColorMode} />,
         },
         {
           path: ROUTE_SEGMENTS.DASHBOARD,

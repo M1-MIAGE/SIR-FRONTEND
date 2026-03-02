@@ -46,7 +46,7 @@ export default function RegisterPage() {
   })
 
   if (isLoading) {
-    return <AppLoader label="Checking session..." />
+    return <AppLoader label="Session de vérification..." />
   }
 
   if (!isLoading && isAuthenticated) {
@@ -72,7 +72,7 @@ export default function RegisterPage() {
       if (apiErrorCode === ERROR_CODES.CONFLICT) {
         setError('email', {
           type: 'server',
-          message: 'Un compte existe deja avec cette adresse e-mail.',
+          message: 'Un compte existe déjà avec cette adresse e-mail.',
         })
         return
       }
@@ -81,7 +81,7 @@ export default function RegisterPage() {
         apiErrorCode === ERROR_CODES.BAD_REQUEST ||
         apiErrorCode === ERROR_CODES.UNPROCESSABLE_ENTITY
       ) {
-        setFormError('Les donnees envoyees sont invalides.')
+        setFormError('Les données envoyées sont invalides.')
         return
       }
 
@@ -218,7 +218,7 @@ export default function RegisterPage() {
 
           <Button
             type="button"
-            label="Deja inscrit ? Se connecter"
+            label="Déjà inscrit ? Se connecter"
             severity="secondary"
             text
             onClick={() => navigate(ROUTES.login())}

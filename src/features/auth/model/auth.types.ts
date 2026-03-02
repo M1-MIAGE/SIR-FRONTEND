@@ -11,16 +11,16 @@ export const loginRequestSchema = z.object({
 export const createUserRequestSchema = z.object({
   email: z.email(),
   password: z.string().min(8),
-  firstName: z.string().trim().min(1),
-  lastName: z.string().trim().min(1),
+  firstName: z.string().trim().min(2),
+  lastName: z.string().trim().min(2),
   role: z.enum(PUBLIC_REGISTRATION_ROLES),
 })
 
 export const responseUserSchema = z.object({
   id: z.uuid(),
   email: z.email(),
-  firstName: z.string().trim().min(1),
-  lastName: z.string().trim().min(1),
+  firstName: z.string().trim().min(2),
+  lastName: z.string().trim().min(2),
   role: z.enum(BACKEND_ROLES),
 })
 

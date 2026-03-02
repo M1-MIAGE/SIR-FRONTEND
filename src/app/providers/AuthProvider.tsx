@@ -1,14 +1,15 @@
-import { type PropsWithChildren, useEffect, useState } from 'react'
+import { type PropsWithChildren, useEffect, useRef, useState } from 'react'
 import { AuthContext, type AuthContextValue } from '@/app/providers/auth-context'
 import { authApi } from '@/features/auth/api/auth.api'
 import { authTokenStore } from '@/shared/auth/token-store'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
-import { ERROR_CODES } from '@/shared/config/routes'
+import { ERROR_CODES, ROUTE_PATHS } from '@/shared/config/routes'
 import type { AppUser } from '@/entities/user/model/user'
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<AppUser | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const didBootstrapRef = useRef(false)
   const [bootstrapErrorCode, setBootstrapErrorCode] =
     useState<AuthContextValue['bootstrapErrorCode']>(null)
 
@@ -81,6 +82,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }
 
   useEffect(() => {
+    if (didBootstrapRef.current) {
+      return
+    }
+
+    didBootstrapRef.current = true
+
+    if (typeof window !== 'undefined') {
+      const publicPaths: Set<string> = new Set([ROUTE_PATHS.ROOT, ROUTE_PATHS.LOGIN, ROUTE_PATHS.REGISTER])
+
+      if (publicPaths.has(window.location.pathname)) {
+        setIsLoading(false)
+        return
+      }
+    }
+
     void refreshSession()
   }, [])
 

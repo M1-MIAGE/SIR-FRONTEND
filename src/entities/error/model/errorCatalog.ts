@@ -19,8 +19,8 @@ export type ResolvedErrorDefinition = ErrorDefinition & {
 
 const ERROR_CATALOG: Record<string, ErrorDefinition> = {
   '400': {
-    title: 'Requete invalide',
-    message: "La requete envoyee n'est pas valide. Verifie les informations et reessaie.",
+    title: 'Requête invalide',
+    message: "La requete envoyée n'est pas valide. Vérifie les informations et réessaie.",
     icon: 'pi pi-exclamation-triangle',
     severity: 'warning',
   },
@@ -31,80 +31,80 @@ const ERROR_CATALOG: Record<string, ErrorDefinition> = {
     severity: 'warning',
   },
   '403': {
-    title: 'Acces refuse',
-    message: "Tu n'as pas les permissions necessaires pour acceder a cette page.",
+    title: 'Accès réfusé',
+    message: "Tu n'as pas les permissions nécessaires pour accéder à cette page.",
     icon: 'pi pi-ban',
     severity: 'warning',
   },
   '404': {
     title: 'Page introuvable',
-    message: "La page demandee n'existe pas ou a ete deplacee.",
+    message: "La page demandée n'existe pas ou a été déplacée.",
     icon: 'pi pi-search',
     severity: 'info',
   },
   '405': {
-    title: 'Methode non autorisee',
-    message: "La methode HTTP utilisee n'est pas acceptee pour cette ressource.",
+    title: 'Méthode non autorisée',
+    message: "La méthode HTTP utilisée n'est pas acceptée pour cette ressource.",
     icon: 'pi pi-times-circle',
     severity: 'warning',
   },
   '408': {
-    title: 'Delai depasse',
-    message: "Le serveur a mis trop de temps a repondre. Reessaie dans un instant.",
+    title: 'Délai dépassé',
+    message: "Le serveur a mis trop de temps a répondre. Réessaie dans un instant.",
     icon: 'pi pi-clock',
     severity: 'warning',
   },
   '409': {
-    title: 'Conflit de donnees',
-    message: 'Une autre operation a cree un conflit. Actualise et reessaie.',
+    title: 'Conflit de données',
+    message: 'Une autre opération a créé un conflit. Actualise et réessaie.',
     icon: 'pi pi-sync',
     severity: 'warning',
   },
   '410': {
-    title: 'Ressource supprimee',
-    message: 'La ressource demandee a ete supprimee definitivement.',
+    title: 'Ressource supprimée',
+    message: 'La ressource demandée a été supprimée définitivement.',
     icon: 'pi pi-trash',
     severity: 'info',
   },
   '413': {
     title: 'Contenu trop volumineux',
-    message: "Le contenu envoye depasse la taille maximale autorisee.",
+    message: "Le contenu envoyé depasse la taille maximale autorisée.",
     icon: 'pi pi-file',
     severity: 'warning',
   },
   '415': {
-    title: 'Format non supporte',
-    message: 'Le format de donnees envoye nest pas supporte.',
+    title: 'Format non supporté',
+    message: "Le format de données envoyé n'est pas supporté.",
     icon: 'pi pi-file-excel',
     severity: 'warning',
   },
   '422': {
-    title: 'Validation echouee',
-    message: 'Certaines donnees sont invalides. Corrige les champs en erreur.',
+    title: 'Validation échouée',
+    message: 'Certaines données sont invalides. Corrige les champs en erreur.',
     icon: 'pi pi-pencil',
     severity: 'warning',
   },
   '429': {
-    title: 'Trop de requetes',
-    message: 'Tu as effectue trop de requetes. Attends un peu avant de reessayer.',
+    title: 'Trop de requêtes',
+    message: 'Tu as effectué trop de requêtes. Attends un peu avant de réessayer.',
     icon: 'pi pi-hourglass',
     severity: 'warning',
   },
   '500': {
     title: 'Erreur interne serveur',
-    message: 'Une erreur interne est survenue. Reessaie dans quelques instants.',
+    message: 'Une erreur interne est survenue. Réessaie dans quelques instants.',
     icon: 'pi pi-exclamation-circle',
     severity: 'danger',
   },
   '501': {
-    title: 'Fonction non implemente',
-    message: "Le serveur ne supporte pas encore cette fonctionnalite.",
+    title: 'Fonction non implementée',
+    message: "Le serveur ne supporte pas encore cette fonctionnalité.",
     icon: 'pi pi-wrench',
     severity: 'danger',
   },
   '502': {
     title: 'Passerelle invalide',
-    message: 'Le serveur intermediaire a recu une reponse invalide.',
+    message: 'Le serveur intermediaire a reçu une réponse invalide.',
     icon: 'pi pi-directions-alt',
     severity: 'danger',
   },
@@ -116,19 +116,19 @@ const ERROR_CATALOG: Record<string, ErrorDefinition> = {
   },
   '504': {
     title: 'Passerelle en timeout',
-    message: "Le delai d'attente avec un service distant a ete depasse.",
+    message: "Le délai d'attente avec un service distant a été dépassé.",
     icon: 'pi pi-clock',
     severity: 'danger',
   },
   offline: {
     title: 'Connexion indisponible',
-    message: "Aucune connexion reseau detectee ou serveur injoignable.",
+    message: "Aucune connexion réseau détectée ou serveur injoignable.",
     icon: 'pi pi-wifi',
     severity: 'warning',
   },
   unexpected: {
     title: 'Erreur inattendue',
-    message: "Une erreur non geree s'est produite dans l'application.",
+    message: "Une erreur inconnue s'est produite dans l'application.",
     icon: 'pi pi-bolt',
     severity: 'danger',
   },
@@ -136,21 +136,21 @@ const ERROR_CATALOG: Record<string, ErrorDefinition> = {
 
 const CLIENT_ERROR_FALLBACK: ErrorDefinition = {
   title: 'Erreur client',
-  message: "La requete ne peut pas etre traitee cote client.",
+  message: "La requête ne peut pas être traitée côté client.",
   icon: 'pi pi-exclamation-triangle',
   severity: 'warning',
 }
 
 const SERVER_ERROR_FALLBACK: ErrorDefinition = {
   title: 'Erreur serveur',
-  message: "Le serveur rencontre un probleme temporaire.",
+  message: "Le serveur rencontre un problème temporaire.",
   icon: 'pi pi-exclamation-circle',
   severity: 'danger',
 }
 
 const UNKNOWN_ERROR_FALLBACK: ErrorDefinition = {
   title: 'Erreur inconnue',
-  message: 'Un probleme inattendu est survenu.',
+  message: 'Un problème inattendu est survenu.',
   icon: 'pi pi-question-circle',
   severity: 'secondary',
 }
