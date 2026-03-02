@@ -2,6 +2,7 @@ const API_SEGMENTS = {
   AUTH: 'auth',
   USERS: 'users',
   CONCERTS: 'concerts',
+  PLACES: 'places',
 } as const
 
 export const API_ENDPOINTS = {
@@ -16,5 +17,9 @@ export const API_ENDPOINTS = {
   },
   CONCERTS: {
     PUBLIC_PLACES: `/${API_SEGMENTS.CONCERTS}/public/places`,
+    CREATE: `/${API_SEGMENTS.CONCERTS}/create`,
+  },
+  PLACES: {
+    ALL: `/${API_SEGMENTS.PLACES}/all`,
   },
 } as const

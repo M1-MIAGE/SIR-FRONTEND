@@ -40,9 +40,17 @@ const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
   timeStyle: 'short',
 })
 
+const currencyFormatter = new Intl.NumberFormat('fr-FR', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})
+
 type ConcertCard = PublicConcertPlaceDto & {
   imageUrl: string
   dateLabel: string
+  ticketUnitPriceLabel: string
   availabilityLabel: string
   availabilitySeverity: 'success' | 'warning' | 'danger'
 }
@@ -66,6 +74,7 @@ const toConcertCard = (concert: PublicConcertPlaceDto): ConcertCard => {
     ...concert,
     imageUrl: pickImage(concert.concertId),
     dateLabel: dateFormatter.format(new Date(concert.concertDate)),
+    ticketUnitPriceLabel: currencyFormatter.format(concert.ticketUnitPrice),
     availabilityLabel,
     availabilitySeverity,
   }
@@ -251,6 +260,9 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
                 <p>
                   <i className="pi pi-map-marker" /> {concert.placeName}, {concert.placeCity}
                 </p>
+                <p className="public-home-event-price">
+                  <i className="pi pi-ticket" /> Prix unitaire: {concert.ticketUnitPriceLabel}
+                </p>
                 <div className="public-home-event-meta">
                   <Tag value={concert.availabilityLabel} severity={concert.availabilitySeverity} />
                   <small>
@@ -293,6 +305,9 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
                 <p>
                   <i className="pi pi-map-marker" /> {concert.placeAddress}, {concert.placeZipCode}{' '}
                   {concert.placeCity}
+                </p>
+                <p className="public-home-event-price">
+                  <i className="pi pi-ticket" /> Prix unitaire: {concert.ticketUnitPriceLabel}
                 </p>
                 <div className="public-home-event-meta">
                   <Tag value={concert.availabilityLabel} severity={concert.availabilitySeverity} />

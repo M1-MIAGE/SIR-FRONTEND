@@ -18,15 +18,22 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setBootstrapErrorCode(null)
 
     try {
-      try {
-        const authenticatedUser = await authApi.me()
-        setUser(authenticatedUser)
-        return
-      } catch (error) {
-        const mappedCode = mapApiErrorCode(error)
-        if (mappedCode !== ERROR_CODES.UNAUTHORIZED) {
-          setBootstrapErrorCode(mappedCode)
+      const hasAccessToken = Boolean(authTokenStore.get())
+
+      if (hasAccessToken) {
+        try {
+          const authenticatedUser = await authApi.me()
+          setUser(authenticatedUser)
           return
+        } catch (error) {
+          const mappedCode = mapApiErrorCode(error)
+          if (mappedCode !== ERROR_CODES.UNAUTHORIZED) {
+            setBootstrapErrorCode(mappedCode)
+            setUser(null)
+            return
+          }
+
+          authTokenStore.clear()
         }
       }
 
@@ -51,6 +58,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         }
 
         setBootstrapErrorCode(mappedCode)
+        setUser(null)
       }
     } finally {
       setIsLoading(false)
@@ -59,6 +67,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const login: AuthContextValue['login'] = async (credentials) => {
     setBootstrapErrorCode(null)
+    authTokenStore.clear()
 
     const tokenPair = await authApi.login(credentials)
     authTokenStore.set(tokenPair)

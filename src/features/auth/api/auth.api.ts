@@ -19,6 +19,7 @@ import { API_ENDPOINTS } from '@/shared/config/api-routes'
 
 const toAppUser = (raw: CurrentUserResponseDto): AppUser => {
   return {
+    id: raw.id,
     email: raw.email,
     firstName: raw.firstName,
     lastName: raw.lastName,

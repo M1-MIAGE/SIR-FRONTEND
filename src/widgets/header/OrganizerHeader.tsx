@@ -25,9 +25,9 @@ export default function OrganizerHeader({ initialColorMode }: OrganizerHeaderPro
         command: () => navigate(ROUTES.roleHome('ORGANIZER')),
       },
       {
-        label: 'Evenements',
-        icon: 'pi pi-ticket',
-        command: () => navigate(ROUTES.roleHome('ORGANIZER')),
+        label: 'Nouveau concert',
+        icon: 'pi pi-plus',
+        command: () => navigate(ROUTES.organizerCreateConcert()),
       },
     ],
     [navigate],
@@ -35,7 +35,7 @@ export default function OrganizerHeader({ initialColorMode }: OrganizerHeaderPro
 
   return (
     <FloatingHeader
-      brand="SIR Organizer"
+      brand="SIR"
       menuItems={menuItems}
       initialColorMode={initialColorMode}
       showLogout

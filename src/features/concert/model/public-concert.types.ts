@@ -11,6 +11,7 @@ export const publicConcertPlaceSchema = z.object({
   placeCity: z.string().min(1),
   placeCapacity: z.number().int().nonnegative(),
   availablePlaces: z.number().int().nonnegative(),
+  ticketUnitPrice: z.number().nonnegative(),
 })
 
 export const publicConcertPlacesSchema = z.array(publicConcertPlaceSchema)

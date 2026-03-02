@@ -37,6 +37,7 @@ export const tokenPairResponseSchema = z.object({
 })
 
 export const currentUserResponseSchema = z.object({
+  id: z.uuid(),
   email: z.email(),
   firstName: z.string().trim().min(2),
   lastName: z.string().trim().min(2),

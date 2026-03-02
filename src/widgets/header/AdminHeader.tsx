@@ -35,7 +35,7 @@ export default function AdminHeader({ initialColorMode }: AdminHeaderProps) {
 
   return (
     <FloatingHeader
-      brand="SIR Admin"
+      brand="SIR"
       menuItems={menuItems}
       initialColorMode={initialColorMode}
       showLogout

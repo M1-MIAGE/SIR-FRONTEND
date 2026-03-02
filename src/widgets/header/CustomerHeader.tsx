@@ -35,7 +35,7 @@ export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps
 
   return (
     <FloatingHeader
-      brand="SIR Customer"
+      brand="SIR"
       menuItems={menuItems}
       initialColorMode={initialColorMode}
       showLogout

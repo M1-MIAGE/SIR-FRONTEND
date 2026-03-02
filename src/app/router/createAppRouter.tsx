@@ -12,6 +12,7 @@ import RegisterPage from '@/pages/auth/RegisterPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
 import HomePage from '@/pages/home/HomePage'
+import OrganizerCreateConcertPage from '@/pages/organizer/OrganizerCreateConcertPage'
 import OrganizerHomePage from '@/pages/organizer/OrganizerHomePage'
 import { ERROR_CODES, ROUTE_PATHS, ROUTE_SEGMENTS } from '@/shared/config/routes'
 
@@ -62,6 +63,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
             {
               index: true,
               element: <OrganizerHomePage />,
+            },
+            {
+              path: `${ROUTE_SEGMENTS.CONCERTS}/${ROUTE_SEGMENTS.CREATE}`,
+              element: <OrganizerCreateConcertPage />,
             },
           ],
         },

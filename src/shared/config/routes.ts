@@ -4,6 +4,8 @@ export const ROUTE_SEGMENTS = {
   DASHBOARD: 'dashboard',
   LOGIN: 'login',
   REGISTER: 'register',
+  CONCERTS: 'concerts',
+  CREATE: 'create',
   CUSTOMER: 'customer',
   ORGANIZER: 'organizer',
   ADMIN: 'admin',
@@ -17,6 +19,7 @@ export const ROUTE_PATHS = {
   REGISTER: `/${ROUTE_SEGMENTS.REGISTER}`,
   CUSTOMER_HOME: `/${ROUTE_SEGMENTS.CUSTOMER}`,
   ORGANIZER_HOME: `/${ROUTE_SEGMENTS.ORGANIZER}`,
+  ORGANIZER_CONCERT_CREATE: `/${ROUTE_SEGMENTS.ORGANIZER}/${ROUTE_SEGMENTS.CONCERTS}/${ROUTE_SEGMENTS.CREATE}`,
   ADMIN_HOME: `/${ROUTE_SEGMENTS.ADMIN}`,
   ERRORS_ROOT: `/${ROUTE_SEGMENTS.ERRORS}`,
   ERROR_DETAIL: `/${ROUTE_SEGMENTS.ERRORS}/:statusCode`,
@@ -53,6 +56,7 @@ export const ROUTES = {
   dashboard: (): string => ROUTE_PATHS.DASHBOARD,
   login: (): string => ROUTE_PATHS.LOGIN,
   register: (): string => ROUTE_PATHS.REGISTER,
+  organizerCreateConcert: (): string => ROUTE_PATHS.ORGANIZER_CONCERT_CREATE,
   roleHome: (role: Role): string => {
     if (role === 'CUSTOMER') {
       return ROUTE_PATHS.CUSTOMER_HOME
