@@ -266,7 +266,7 @@ export default function OrganizerHomePage() {
   }, [stats])
 
   const renderBreakdownTable = (rows: OrganizerStatsBreakdownRowDto[]) => (
-    <DataTable value={rows} size="small" responsiveLayout="scroll" stripedRows>
+    <DataTable value={rows} size="small" stripedRows>
       <Column field="label" header="Libelle" />
       <Column
         field="concertCount"
@@ -308,7 +308,7 @@ export default function OrganizerHomePage() {
   )
 
   const renderRankingTable = (rows: OrganizerStatsRankingRowDto[]) => (
-    <DataTable value={rows} size="small" responsiveLayout="scroll" stripedRows>
+    <DataTable value={rows} size="small" stripedRows>
       <Column field="concertTitle" header="Concert" />
       <Column
         field="concertArtist"
@@ -575,7 +575,7 @@ export default function OrganizerHomePage() {
             </div>
 
             <Card title="Chronologie" className="organizer-timeline-card">
-              <DataTable value={stats.timeline} size="small" responsiveLayout="scroll" stripedRows>
+              <DataTable value={stats.timeline} size="small" stripedRows>
                 <Column field="bucketLabel" header="Periode" />
                 <Column
                   field="concertsCreated"
@@ -628,7 +628,6 @@ export default function OrganizerHomePage() {
                 <DataTable
                   value={stats.concerts}
                   size="small"
-                  responsiveLayout="scroll"
                   stripedRows
                   paginator
                   rows={10}
