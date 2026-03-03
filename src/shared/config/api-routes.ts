@@ -3,6 +3,7 @@ const API_SEGMENTS = {
   USERS: 'users',
   CONCERTS: 'concerts',
   PLACES: 'places',
+  STATS: 'stats',
 } as const
 
 export const API_ENDPOINTS = {
@@ -21,5 +22,8 @@ export const API_ENDPOINTS = {
   },
   PLACES: {
     ALL: `/${API_SEGMENTS.PLACES}/all`,
+  },
+  STATS: {
+    ME_CONCERTS: `/${API_SEGMENTS.STATS}/me/concerts`,
   },
 } as const

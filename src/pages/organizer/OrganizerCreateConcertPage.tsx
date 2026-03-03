@@ -10,6 +10,7 @@ import { Dropdown } from 'primereact/dropdown'
 import { FloatLabel } from 'primereact/floatlabel'
 import { InputNumber } from 'primereact/inputnumber'
 import { InputText } from 'primereact/inputtext'
+import { InputTextarea } from 'primereact/inputtextarea'
 import { Message } from 'primereact/message'
 import { Tag } from 'primereact/tag'
 import { useAuth } from '@/app/providers/auth-context'
@@ -23,6 +24,7 @@ import PageContainer from '@/shared/ui/layout/PageContainer'
 
 const createConcertFormSchema = z.object({
   title: z.string().trim().min(2, 'Titre requis (min 2 caracteres).'),
+  description: z.string().trim().min(2, 'Description requise (min 2 caracteres).'),
   artist: z.string().trim().min(2, 'Artiste requis (min 2 caracteres).'),
   date: z.date().refine((value) => !Number.isNaN(value.getTime()), 'Date et heure requises.'),
   placeId: z.uuid('Lieu requis.'),
@@ -54,6 +56,7 @@ export default function OrganizerCreateConcertPage() {
     resolver: zodResolver(createConcertFormSchema),
     defaultValues: {
       title: '',
+      description: '',
       artist: '',
       date: defaultEventDate(),
       placeId: '',
@@ -140,6 +143,7 @@ export default function OrganizerCreateConcertPage() {
 
     const payload: CreateConcertRequestDto = {
       title: values.title.trim(),
+      description: values.description.trim(),
       artist: values.artist.trim(),
       date: values.date.toISOString(),
       organizerId: user.id,
@@ -154,6 +158,7 @@ export default function OrganizerCreateConcertPage() {
       setSuccessMessage('Concert cree avec succes.')
       reset({
         title: '',
+        description: '',
         artist: '',
         date: defaultEventDate(),
         placeId: '',
@@ -233,6 +238,30 @@ export default function OrganizerCreateConcertPage() {
                           className={fieldState.invalid ? 'p-invalid' : undefined}
                         />
                         <label htmlFor="concert-artist">Artiste</label>
+                      </FloatLabel>
+                      {fieldState.error?.message ? (
+                        <small className="p-error">{fieldState.error.message}</small>
+                      ) : null}
+                    </div>
+                  )}
+                />
+
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <div className="auth-field form-grid-field-span-2">
+                      <FloatLabel>
+                        <InputTextarea
+                          id="concert-description"
+                          value={field.value}
+                          onBlur={field.onBlur}
+                          onChange={(event) => field.onChange(event.target.value)}
+                          rows={5}
+                          autoResize
+                          className={fieldState.invalid ? 'p-invalid' : undefined}
+                        />
+                        <label htmlFor="concert-description">Description</label>
                       </FloatLabel>
                       {fieldState.error?.message ? (
                         <small className="p-error">{fieldState.error.message}</small>
