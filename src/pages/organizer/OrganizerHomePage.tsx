@@ -31,6 +31,12 @@ import {
 } from '@/features/stats/model/organizer-stats.types'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
+import {
+  currencyFormatter,
+  dateTimeFormatter,
+  numberFormatter,
+  percentFormatter,
+} from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
 
 const granularityOptions: { label: string; value: StatsGranularity }[] = [
@@ -53,20 +59,6 @@ const statsFiltersFormSchema = z
   })
 
 type StatsFiltersFormValues = z.infer<typeof statsFiltersFormSchema>
-
-const numberFormatter = new Intl.NumberFormat('fr-FR')
-const currencyFormatter = new Intl.NumberFormat('fr-FR', {
-  style: 'currency',
-  currency: 'EUR',
-})
-const percentFormatter = new Intl.NumberFormat('fr-FR', {
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1,
-})
-const dateTimeFormatter = new Intl.DateTimeFormat('fr-FR', {
-  dateStyle: 'medium',
-  timeStyle: 'short',
-})
 
 const buildDefaultFilters = (): StatsFiltersFormValues => {
   const to = new Date()

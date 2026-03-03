@@ -11,13 +11,8 @@ import { adminConcertApi } from '@/features/concert/api/admin-concert.api'
 import type { AdminConcertModerationDto } from '@/features/concert/model/admin-concert.types'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
+import { dateTimeFormatter, numberFormatter } from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
-
-const numberFormatter = new Intl.NumberFormat('fr-FR')
-const dateTimeFormatter = new Intl.DateTimeFormat('fr-FR', {
-  dateStyle: 'medium',
-  timeStyle: 'short',
-})
 
 const formatOrganizer = (row: AdminConcertModerationDto): string => {
   const fullName = `${row.organizerFirstName ?? ''} ${row.organizerLastName ?? ''}`.trim()

@@ -15,6 +15,7 @@ import { publicConcertApi } from '@/features/concert/api/public-concert.api'
 import type { PublicConcertPlaceDto } from '@/features/concert/model/public-concert.types'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ROUTES } from '@/shared/config/routes'
+import { currencyFormatter, dateTimeFormatter } from '@/shared/lib/formatters'
 
 type ConcertLandingSectionsProps = {
   mode: 'public' | 'customer'
@@ -34,18 +35,6 @@ const hashString = (value: string): number =>
 
 const pickImage = (concertId: string): string =>
   CONCERT_IMAGE_POOL[hashString(concertId) % CONCERT_IMAGE_POOL.length]
-
-const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
-  dateStyle: 'medium',
-  timeStyle: 'short',
-})
-
-const currencyFormatter = new Intl.NumberFormat('fr-FR', {
-  style: 'currency',
-  currency: 'EUR',
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-})
 
 type ConcertCard = PublicConcertPlaceDto & {
   imageUrl: string
@@ -73,7 +62,7 @@ const toConcertCard = (concert: PublicConcertPlaceDto): ConcertCard => {
   return {
     ...concert,
     imageUrl: pickImage(concert.concertId),
-    dateLabel: dateFormatter.format(new Date(concert.concertDate)),
+    dateLabel: dateTimeFormatter.format(new Date(concert.concertDate)),
     ticketUnitPriceLabel: currencyFormatter.format(concert.ticketUnitPrice),
     availabilityLabel,
     availabilitySeverity,
