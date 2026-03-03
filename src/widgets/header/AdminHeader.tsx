@@ -20,14 +20,9 @@ export default function AdminHeader({ initialColorMode }: AdminHeaderProps) {
         command: () => navigate(ROUTES.root()),
       },
       {
-        label: 'Administration',
+        label: 'Dashboard',
         icon: 'pi pi-cog',
         command: () => navigate(ROUTES.roleHome('ADMIN')),
-      },
-      {
-        label: 'Erreurs',
-        icon: 'pi pi-exclamation-triangle',
-        command: () => navigate(ROUTES.errors.internal()),
       },
     ],
     [navigate],

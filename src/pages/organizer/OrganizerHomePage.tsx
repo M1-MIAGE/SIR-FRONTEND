@@ -266,7 +266,7 @@ export default function OrganizerHomePage() {
   }, [stats])
 
   const renderBreakdownTable = (rows: OrganizerStatsBreakdownRowDto[]) => (
-    <DataTable value={rows} size="small" stripedRows>
+    <DataTable value={rows} size="small" stripedRows emptyMessage="Aucune donnée trouvée">
       <Column field="label" header="Libelle" />
       <Column
         field="concertCount"

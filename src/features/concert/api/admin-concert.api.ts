@@ -28,7 +28,13 @@ export const adminConcertApi = {
 
   async validate(concertId: string): Promise<ConcertDetailsDto> {
     const parsedConcertId = concertIdSchema.parse(concertId)
-    const { data } = await http.post(API_ENDPOINTS.CONCERTS.VALIDATE(parsedConcertId), {})
+    const { data } = await http.post(API_ENDPOINTS.CONCERTS.VALIDATE(parsedConcertId))
+    return concertDetailsSchema.parse(data)
+  },
+
+  async reject(concertId: string): Promise<ConcertDetailsDto> {
+    const parsedConcertId = concertIdSchema.parse(concertId)
+    const { data } = await http.post(API_ENDPOINTS.CONCERTS.REJECT(parsedConcertId))
     return concertDetailsSchema.parse(data)
   },
 }

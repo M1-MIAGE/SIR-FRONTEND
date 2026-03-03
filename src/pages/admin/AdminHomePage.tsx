@@ -42,6 +42,7 @@ export default function AdminHomePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [isValidatingConcertId, setIsValidatingConcertId] = useState<string | null>(null)
+  const [isRejectingConcertId, setIsRejectingConcertId] = useState<string | null>(null)
   const [apiError, setApiError] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
@@ -106,7 +107,7 @@ export default function AdminHomePage() {
 
       try {
         const validated = await adminConcertApi.validate(concertId)
-        setSuccessMessage(`Concert valide: ${validated.title}`)
+        setSuccessMessage(`Concert validé: ${validated.title}`)
         setActiveTabIndex(1)
         await loadModerationData(false)
       } catch (error) {
@@ -125,8 +126,35 @@ export default function AdminHomePage() {
     [loadModerationData, navigate],
   )
 
+  const handleRejectConcert = useCallback(
+    async (concertId: string) => {
+      setSuccessMessage(null)
+      setApiError(null)
+      setIsRejectingConcertId(concertId)
+
+      try {
+        const rejected = await adminConcertApi.reject(concertId)
+        setSuccessMessage(`Concert refusé: ${rejected.title}`)
+        setActiveTabIndex(2)
+        await loadModerationData(false)
+      } catch (error) {
+        const code = mapApiErrorCode(error)
+
+        if (code === ERROR_CODES.UNAUTHORIZED || code === ERROR_CODES.FORBIDDEN) {
+          navigate(ROUTES.errors.byCode(code), { replace: true })
+          return
+        }
+
+        setApiError(code)
+      } finally {
+        setIsRejectingConcertId(null)
+      }
+    },
+    [loadModerationData, navigate],
+  )
+
   const renderConcertTable = (rows: AdminConcertModerationDto[], enableValidateAction = false) => (
-    <DataTable value={rows} size="small" stripedRows emptyMessage="Aucun concert trouve.">
+    <DataTable value={rows} size="small" stripedRows paginator rows={5} emptyMessage="Aucun concert trouve.">
       <Column field="concertTitle" header="Concert" />
       <Column
         field="concertArtist"
@@ -135,7 +163,7 @@ export default function AdminHomePage() {
       />
       <Column
         field="concertCreatedAt"
-        header="Cree le"
+        header="Créé le"
         body={(row: AdminConcertModerationDto) =>
           dateTimeFormatter.format(new Date(row.concertCreatedAt))
         }
@@ -149,7 +177,7 @@ export default function AdminHomePage() {
       <Column header="Ville" body={(row: AdminConcertModerationDto) => formatLocation(row)} />
       <Column
         field="placeCapacity"
-        header="Capacite"
+        header="Capacité"
         body={(row: AdminConcertModerationDto) =>
           row.placeCapacity === null ? 'N/A' : numberFormatter.format(row.placeCapacity)
         }
@@ -170,8 +198,17 @@ export default function AdminHomePage() {
                 size="small"
                 severity="success"
                 loading={isValidatingConcertId === row.concertId}
-                disabled={Boolean(isValidatingConcertId)}
+                disabled={Boolean(isValidatingConcertId || isRejectingConcertId)}
                 onClick={() => void handleValidateConcert(row.concertId)}
+              />
+              <Button
+                label="Refuser"
+                icon="pi pi-times"
+                size="small"
+                severity="danger"
+                loading={isRejectingConcertId === row.concertId}
+                disabled={Boolean(isValidatingConcertId || isRejectingConcertId)}
+                onClick={() => void handleRejectConcert(row.concertId)}
               />
             </div>
           )}
@@ -223,10 +260,10 @@ export default function AdminHomePage() {
                 <TabPanel header={`En attente (${pendingConcerts.length})`}>
                   {renderConcertTable(pendingConcerts, true)}
                 </TabPanel>
-                <TabPanel header={`Approuves (${approvedConcerts.length})`}>
+                <TabPanel header={`Approuvés (${approvedConcerts.length})`}>
                   {renderConcertTable(approvedConcerts)}
                 </TabPanel>
-                <TabPanel header={`Rejetes (${rejectedConcerts.length})`}>
+                <TabPanel header={`Rejetés (${rejectedConcerts.length})`}>
                   {renderConcertTable(rejectedConcerts)}
                 </TabPanel>
               </TabView>
