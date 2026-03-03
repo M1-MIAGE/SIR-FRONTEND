@@ -19,6 +19,10 @@ export const API_ENDPOINTS = {
   CONCERTS: {
     PUBLIC_PLACES: `/${API_SEGMENTS.CONCERTS}/public/places`,
     CREATE: `/${API_SEGMENTS.CONCERTS}/create`,
+    APPROVED: `/${API_SEGMENTS.CONCERTS}/approved`,
+    PENDING: `/${API_SEGMENTS.CONCERTS}/pending`,
+    REJECTED: `/${API_SEGMENTS.CONCERTS}/rejected`,
+    VALIDATE: (concertId: string): string => `/${API_SEGMENTS.CONCERTS}/${concertId}/validate`,
   },
   PLACES: {
     ALL: `/${API_SEGMENTS.PLACES}/all`,
