@@ -9,6 +9,7 @@ import type { ColorMode } from '@/features/theme/toggle-theme/model/theme'
 import AdminHomePage from '@/pages/admin/AdminHomePage'
 import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
+import CustomerConcertDetailsPage from '@/pages/customer/CustomerConcertDetailsPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
 import HomePage from '@/pages/home/HomePage'
@@ -49,6 +50,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
             {
               index: true,
               element: <CustomerHomePage />,
+            },
+            {
+              path: `${ROUTE_SEGMENTS.CONCERTS}/:concertId`,
+              element: <CustomerConcertDetailsPage />,
             },
           ],
         },

@@ -2,6 +2,7 @@ const API_SEGMENTS = {
   AUTH: 'auth',
   USERS: 'users',
   CONCERTS: 'concerts',
+  TICKETS: 'tickets',
   PLACES: 'places',
   STATS: 'stats',
 } as const
@@ -24,6 +25,9 @@ export const API_ENDPOINTS = {
     REJECTED: `/${API_SEGMENTS.CONCERTS}/rejected`,
     VALIDATE: (concertId: string): string => `/${API_SEGMENTS.CONCERTS}/${concertId}/validate`,
     REJECT: (concertId: string): string => `/${API_SEGMENTS.CONCERTS}/${concertId}/reject`,
+  },
+  TICKETS: {
+    PURCHASE: `/${API_SEGMENTS.TICKETS}/purchase`,
   },
   PLACES: {
     ALL: `/${API_SEGMENTS.PLACES}/all`,

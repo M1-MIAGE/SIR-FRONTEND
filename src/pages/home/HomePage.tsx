@@ -25,11 +25,6 @@ export default function HomePage({ initialColorMode }: HomePageProps) {
       { label: 'Accueil', icon: 'pi pi-home', command: () => scrollToSection('hero') },
       { label: 'A la une', icon: 'pi pi-star', command: () => scrollToSection('featured') },
       { label: 'A venir', icon: 'pi pi-calendar', command: () => scrollToSection('upcoming') },
-      {
-        label: 'Pourquoi nous',
-        icon: 'pi pi-question-circle',
-        command: () => scrollToSection('why'),
-      },
     ],
     [],
   )
@@ -37,7 +32,7 @@ export default function HomePage({ initialColorMode }: HomePageProps) {
   return (
     <div className="public-home">
       <FloatingHeader
-        brand="SIR Tickets"
+        brand="SIR"
         menuItems={menuItems}
         initialColorMode={initialColorMode}
         actionSlot={

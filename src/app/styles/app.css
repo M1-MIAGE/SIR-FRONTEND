@@ -373,6 +373,21 @@
   color: #e2e8f0;
 }
 
+.public-home-event-card--clickable {
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.public-home-event-card--clickable:hover {
+  transform: translateY(-2px);
+  border-color: rgb(245 158 11 / 0.45);
+}
+
+.public-home-event-card--clickable:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
 .public-home-event-card .p-card-body {
   display: grid;
   gap: 0.7rem;
@@ -683,4 +698,73 @@
   gap: var(--space-2);
   flex-wrap: wrap;
   white-space: nowrap;
+}
+
+.customer-concert-details {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.customer-concert-card .p-card-body,
+.customer-purchase-card .p-card-body {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.customer-concert-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.customer-concert-rows {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.customer-concert-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed var(--surface-border);
+}
+
+.customer-concert-label {
+  color: var(--text-color-secondary);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.customer-purchase-form {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.customer-quantity-control {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.customer-quantity-control .p-button {
+  min-width: 2.5rem;
+}
+
+.customer-quantity-control .p-inputnumber {
+  width: 100%;
+}
+
+.customer-purchase-form .p-inputnumber {
+  width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .customer-concert-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
 }

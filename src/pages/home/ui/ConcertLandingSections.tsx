@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { type KeyboardEvent, useEffect, useMemo, useState } from 'react'
 import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
 import { Chip } from 'primereact/chip'
@@ -27,7 +27,6 @@ const CONCERT_IMAGE_POOL = [
   'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1280&q=80',
   'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1280&q=80',
   'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1280&q=80',
-  'https://images.unsplash.com/photo-1464375117522-1311dd7d0b87?w=1280&q=80',
 ]
 
 const hashString = (value: string): number =>
@@ -56,7 +55,7 @@ const toConcertCard = (concert: PublicConcertPlaceDto): ConcertCard => {
     availabilityLabel = 'Complet'
   } else if (availabilityRatio <= 0.2) {
     availabilitySeverity = 'warning'
-    availabilityLabel = 'Dernieres places'
+    availabilityLabel = 'Dernières places'
   }
 
   return {
@@ -151,6 +150,27 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
     navigate(ROUTES.login())
   }
 
+  const openConcertDetails = (concert: ConcertCard) => {
+    if (mode !== 'customer') {
+      return
+    }
+
+    navigate(ROUTES.customerConcertDetails(concert.concertId), {
+      state: {
+        concert,
+      },
+    })
+  }
+
+  const onConcertCardKeyDown = (event: KeyboardEvent<HTMLElement>, concert: ConcertCard) => {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return
+    }
+
+    event.preventDefault()
+    openConcertDetails(concert)
+  }
+
   const renderSkeletonGrid = () => (
     <div className="public-home-events-grid">
       {[1, 2, 3, 4].map((key) => (
@@ -172,7 +192,7 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
         <div className="public-home-hero-content">
           <Chip label="Concerts + Billets + Experience" className="public-home-hero-chip" />
           <h1 className="public-home-hero-title">
-            Vivez des soirees
+            Vivez des soirées
             <span>inoubliables</span>
           </h1>
           <p className="public-home-hero-subtitle">
@@ -229,7 +249,20 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
         ) : (
           <div className="public-home-events-grid">
             {featuredConcerts.map((concert) => (
-              <Card key={concert.concertId} className="public-home-event-card">
+              <Card
+                key={concert.concertId}
+                className={`public-home-event-card ${
+                  mode === 'customer' ? 'public-home-event-card--clickable' : ''
+                }`.trim()}
+                role={mode === 'customer' ? 'button' : undefined}
+                tabIndex={mode === 'customer' ? 0 : undefined}
+                onClick={mode === 'customer' ? () => openConcertDetails(concert) : undefined}
+                onKeyDown={
+                  mode === 'customer'
+                    ? (event) => onConcertCardKeyDown(event, concert)
+                    : undefined
+                }
+              >
                 <div className="public-home-event-image-wrap">
                   <img
                     src={concert.imageUrl}
@@ -255,7 +288,7 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
                 <div className="public-home-event-meta">
                   <Tag value={concert.availabilityLabel} severity={concert.availabilitySeverity} />
                   <small>
-                    {concert.availablePlaces}/{concert.placeCapacity} places
+                    {concert.availablePlaces} places dispo
                   </small>
                 </div>
               </Card>
@@ -266,8 +299,8 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
 
       <section id="upcoming" className="public-home-section public-home-section-muted">
         <div className="public-home-section-head">
-          <h2>Evenements a venir</h2>
-          <Tag value={`${filteredConcerts.length} resultats`} severity="success" />
+          <h2>Evènements à venir</h2>
+          <Tag value={`${filteredConcerts.length} résultats`} severity="success" />
         </div>
 
         {isLoading ? (
@@ -275,7 +308,20 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
         ) : (
           <div className="public-home-events-grid">
             {filteredConcerts.map((concert) => (
-              <Card key={concert.concertId} className="public-home-event-card">
+              <Card
+                key={concert.concertId}
+                className={`public-home-event-card ${
+                  mode === 'customer' ? 'public-home-event-card--clickable' : ''
+                }`.trim()}
+                role={mode === 'customer' ? 'button' : undefined}
+                tabIndex={mode === 'customer' ? 0 : undefined}
+                onClick={mode === 'customer' ? () => openConcertDetails(concert) : undefined}
+                onKeyDown={
+                  mode === 'customer'
+                    ? (event) => onConcertCardKeyDown(event, concert)
+                    : undefined
+                }
+              >
                 <div className="public-home-event-image-wrap">
                   <img
                     src={concert.imageUrl}
@@ -301,7 +347,7 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
                 <div className="public-home-event-meta">
                   <Tag value={concert.availabilityLabel} severity={concert.availabilitySeverity} />
                   <small>
-                    {concert.availablePlaces}/{concert.placeCapacity} places
+                    {concert.availablePlaces} places dispo
                   </small>
                 </div>
               </Card>

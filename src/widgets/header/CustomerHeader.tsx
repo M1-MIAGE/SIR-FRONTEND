@@ -24,11 +24,6 @@ export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps
         icon: 'pi pi-home',
         command: () => navigate(ROUTES.roleHome('CUSTOMER')),
       },
-      {
-        label: 'Aide',
-        icon: 'pi pi-question-circle',
-        command: () => navigate(ROUTES.errors.serviceUnavailable()),
-      },
     ],
     [navigate],
   )

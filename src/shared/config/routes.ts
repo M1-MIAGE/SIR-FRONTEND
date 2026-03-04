@@ -18,6 +18,7 @@ export const ROUTE_PATHS = {
   LOGIN: `/${ROUTE_SEGMENTS.LOGIN}`,
   REGISTER: `/${ROUTE_SEGMENTS.REGISTER}`,
   CUSTOMER_HOME: `/${ROUTE_SEGMENTS.CUSTOMER}`,
+  CUSTOMER_CONCERT_DETAIL: `/${ROUTE_SEGMENTS.CUSTOMER}/${ROUTE_SEGMENTS.CONCERTS}/:concertId`,
   ORGANIZER_HOME: `/${ROUTE_SEGMENTS.ORGANIZER}`,
   ORGANIZER_CONCERT_CREATE: `/${ROUTE_SEGMENTS.ORGANIZER}/${ROUTE_SEGMENTS.CONCERTS}/${ROUTE_SEGMENTS.CREATE}`,
   ADMIN_HOME: `/${ROUTE_SEGMENTS.ADMIN}`,
@@ -57,6 +58,8 @@ export const ROUTES = {
   login: (): string => ROUTE_PATHS.LOGIN,
   register: (): string => ROUTE_PATHS.REGISTER,
   organizerCreateConcert: (): string => ROUTE_PATHS.ORGANIZER_CONCERT_CREATE,
+  customerConcertDetails: (concertId: string): string =>
+    `/${ROUTE_SEGMENTS.CUSTOMER}/${ROUTE_SEGMENTS.CONCERTS}/${concertId}`,
   roleHome: (role: Role): string => {
     if (role === 'CUSTOMER') {
       return ROUTE_PATHS.CUSTOMER_HOME
