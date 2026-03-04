@@ -37,6 +37,7 @@ import {
     percentFormatter,
 } from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
+import {rowsPerPageOptions} from "@/shared/lib/table.ts";
 
 const granularityOptions: { label: string; value: StatsGranularity }[] = [
     {label: 'Jour', value: 'DAY'},
@@ -265,7 +266,7 @@ export default function OrganizerHomePage() {
             stripedRows
             paginator
             rows={5}
-            rowsPerPageOptions={[5, 10, 25, 50]}
+            rowsPerPageOptions={rowsPerPageOptions}
             emptyMessage="Aucune donnée trouvée"
         >
             <Column field="label" header="Libelle" sortable/>
@@ -588,7 +589,7 @@ export default function OrganizerHomePage() {
                                 emptyMessage="Aucune donnée trouvée"
                                 paginator
                                 rows={5}
-                                rowsPerPageOptions={[5, 10, 25, 50]}
+                                rowsPerPageOptions={rowsPerPageOptions}
                             >
                                 <Column field="bucketLabel" header="Periode" sortable/>
                                 <Column
@@ -653,7 +654,7 @@ export default function OrganizerHomePage() {
                                     paginator
                                     rows={10}
                                     emptyMessage="Aucune donnée trouvée"
-                                    rowsPerPageOptions={[5, 10, 25, 50]}
+                                    rowsPerPageOptions={rowsPerPageOptions}
                                 >
                                     <Column field="concertTitle" header="Concert" sortable/>
                                     <Column

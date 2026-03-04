@@ -761,6 +761,39 @@
   width: 100%;
 }
 
+.customer-ticket-page {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.customer-ticket-kpi-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.customer-ticket-kpi-card .p-card-body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.customer-ticket-kpi-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.customer-ticket-small-muted {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: 0.88rem;
+}
+
+.customer-ticket-code {
+  font-family: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, monospace;
+  font-size: 0.82rem;
+}
+
 @media (max-width: 767.98px) {
   .customer-concert-row {
     flex-direction: column;

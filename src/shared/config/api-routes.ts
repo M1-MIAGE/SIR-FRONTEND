@@ -28,6 +28,7 @@ export const API_ENDPOINTS = {
   },
   TICKETS: {
     PURCHASE: `/${API_SEGMENTS.TICKETS}/purchase`,
+    ME: `/${API_SEGMENTS.TICKETS}/me`,
   },
   PLACES: {
     ALL: `/${API_SEGMENTS.PLACES}/all`,

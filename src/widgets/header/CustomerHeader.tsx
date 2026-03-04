@@ -24,6 +24,11 @@ export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps
         icon: 'pi pi-home',
         command: () => navigate(ROUTES.roleHome('CUSTOMER')),
       },
+      {
+        label: 'Mes Tickets',
+        icon: 'pi pi-ticket',
+        command: () => navigate(ROUTES.customerTickets()),
+      },
     ],
     [navigate],
   )

@@ -11,6 +11,7 @@ import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
 import CustomerConcertDetailsPage from '@/pages/customer/CustomerConcertDetailsPage'
 import CustomerHomePage from '@/pages/customer/CustomerHomePage'
+import CustomerTicketsPage from '@/pages/customer/CustomerTicketsPage'
 import ErrorPage from '@/pages/ErrorPage/ui/ErrorPage'
 import HomePage from '@/pages/home/HomePage'
 import OrganizerCreateConcertPage from '@/pages/organizer/OrganizerCreateConcertPage'
@@ -54,6 +55,10 @@ export const createAppRouter = (initialColorMode: ColorMode) =>
             {
               path: `${ROUTE_SEGMENTS.CONCERTS}/:concertId`,
               element: <CustomerConcertDetailsPage />,
+            },
+            {
+              path: ROUTE_SEGMENTS.TICKETS,
+              element: <CustomerTicketsPage />,
             },
           ],
         },
