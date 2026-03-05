@@ -195,9 +195,6 @@ export default function ConcertLandingSections({ mode }: ConcertLandingSectionsP
             Vivez des soirées
             <span>inoubliables</span>
           </h1>
-          <p className="public-home-hero-subtitle">
-            Découvrez les meilleurs concerts près de chez vous. Réservez vos places en toute sécurité.
-          </p>
 
           <div className="public-home-search">
             <IconField iconPosition="left" className="public-home-search-field">

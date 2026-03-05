@@ -5,7 +5,6 @@ import { Card } from 'primereact/card'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { Message } from 'primereact/message'
-import { Skeleton } from 'primereact/skeleton'
 import { TabPanel, TabView } from 'primereact/tabview'
 import { adminConcertApi } from '@/features/concert/api/admin-concert.api'
 import type { AdminConcertModerationDto } from '@/features/concert/model/admin-concert.types'
@@ -13,6 +12,7 @@ import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
 import { dateTimeFormatter, numberFormatter } from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
+import StackedCardSkeleton from '@/shared/ui/primereact/StackedCardSkeleton'
 
 const formatOrganizer = (row: AdminConcertModerationDto): string => {
   const fullName = `${row.organizerFirstName ?? ''} ${row.organizerLastName ?? ''}`.trim()
@@ -230,14 +230,7 @@ export default function AdminHomePage() {
         {successMessage ? <Message severity="success" text={successMessage} /> : null}
 
         {isLoading ? (
-          <Card>
-            <div className="stack">
-              <Skeleton height="2rem" width="16rem" />
-              <Skeleton height="1rem" width="100%" />
-              <Skeleton height="1rem" width="100%" />
-              <Skeleton height="1rem" width="70%" />
-            </div>
-          </Card>
+          <StackedCardSkeleton titleWidth="16rem" tailWidth="70%" />
         ) : (
           <>
             <section className="admin-kpi-grid">

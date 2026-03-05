@@ -12,7 +12,6 @@ import {InputNumber} from 'primereact/inputnumber'
 import {InputSwitch} from 'primereact/inputswitch'
 import {Message} from 'primereact/message'
 import {SelectButton} from 'primereact/selectbutton'
-import {Skeleton} from 'primereact/skeleton'
 import {TabPanel, TabView} from 'primereact/tabview'
 import {Tag} from 'primereact/tag'
 import {
@@ -37,6 +36,7 @@ import {
     percentFormatter,
 } from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
+import StackedCardSkeleton from '@/shared/ui/primereact/StackedCardSkeleton'
 import {rowsPerPageOptions} from "@/shared/lib/table.ts";
 
 const granularityOptions: { label: string; value: StatsGranularity }[] = [
@@ -506,14 +506,7 @@ export default function OrganizerHomePage() {
                 ) : null}
 
                 {isLoading && !stats ? (
-                    <Card>
-                        <div className="stack">
-                            <Skeleton height="2rem" width="12rem"/>
-                            <Skeleton height="1rem" width="100%"/>
-                            <Skeleton height="1rem" width="100%"/>
-                            <Skeleton height="1rem" width="80%"/>
-                        </div>
-                    </Card>
+                    <StackedCardSkeleton titleWidth="12rem" tailWidth="80%"/>
                 ) : null}
 
                 {stats ? (

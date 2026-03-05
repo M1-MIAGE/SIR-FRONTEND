@@ -190,11 +190,6 @@
 
 .public-home {
   min-height: 100dvh;
-  color: #e2e8f0;
-  background:
-    radial-gradient(circle at 20% -20%, rgb(245 158 11 / 0.2), transparent 35%),
-    radial-gradient(circle at 85% 10%, rgb(14 165 233 / 0.16), transparent 30%),
-    #020617;
 }
 
 .app-floating-header {
@@ -208,7 +203,7 @@
   width: min(100%, 1100px);
   margin-inline: auto;
   border: 1px solid rgb(148 163 184 / 0.2);
-  background: rgb(2 6 23 / 0.78);
+  /*background: rgb(2 6 23 / 0.78);*/
   backdrop-filter: blur(10px);
   border-radius: 1rem;
 }
@@ -252,9 +247,9 @@
 .public-home-hero-overlay {
   position: absolute;
   inset: 0;
-  background:
+  /*background:
     linear-gradient(160deg, rgb(2 6 23 / 0.88), rgb(2 6 23 / 0.7)),
-    linear-gradient(0deg, rgb(2 6 23 / 0.85), transparent 55%);
+    linear-gradient(0deg, rgb(2 6 23 / 0.85), transparent 55%);*/
 }
 
 .public-home-hero-content {
@@ -284,12 +279,6 @@
   color: #f59e0b;
 }
 
-.public-home-hero-subtitle {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
-}
-
 .public-home-search {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -300,13 +289,6 @@
 
 .public-home-search-field .p-inputtext {
   width: 100%;
-  background: rgb(15 23 42 / 0.78);
-  border-color: rgb(148 163 184 / 0.35);
-  color: #fff;
-}
-
-.public-home-search-field .p-inputtext::placeholder {
-  color: #94a3b8;
 }
 
 .public-home-genre-list {
@@ -334,7 +316,7 @@
   padding: var(--space-4);
   border: 1px solid rgb(148 163 184 / 0.2);
   border-radius: 1rem;
-  background: rgb(15 23 42 / 0.45);
+  /*background: rgb(15 23 42 / 0.45);*/
 }
 
 .public-home-section-head {
@@ -348,12 +330,11 @@
 .public-home-section-head h2 {
   margin: 0;
   font-size: clamp(1.25rem, 1rem + 1vw, 2rem);
-  color: #fff;
+
 }
 
 .public-home-section-head p {
   margin: 0;
-  color: #94a3b8;
 }
 
 .public-home-section-head-center {
@@ -368,9 +349,7 @@
 }
 
 .public-home-event-card {
-  background: rgb(15 23 42 / 0.75);
   border: 1px solid rgb(148 163 184 / 0.2);
-  color: #e2e8f0;
 }
 
 .public-home-event-card--clickable {
@@ -380,7 +359,6 @@
 
 .public-home-event-card--clickable:hover {
   transform: translateY(-2px);
-  border-color: rgb(245 158 11 / 0.45);
 }
 
 .public-home-event-card--clickable:focus-visible {
@@ -396,16 +374,13 @@
 .public-home-event-card h3 {
   margin: 0;
   font-size: 1.05rem;
-  color: #fff;
 }
 
 .public-home-event-card p {
   margin: 0;
-  color: #94a3b8;
 }
 
 .public-home-event-price {
-  color: #f8fafc !important;
   font-weight: 700;
 }
 
@@ -444,9 +419,7 @@
 
 .public-home-genre-card,
 .public-home-value-card {
-  background: rgb(15 23 42 / 0.75);
   border: 1px solid rgb(148 163 184 / 0.2);
-  color: #e2e8f0;
 }
 
 .public-home-genre-card-content {
@@ -463,12 +436,10 @@
 
 .public-home-value-card h3 {
   margin: 0;
-  color: #fff;
 }
 
 .public-home-value-card p {
   margin: 0;
-  color: #94a3b8;
 }
 
 .public-home-value-icon {
@@ -477,15 +448,11 @@
   border-radius: 0.8rem;
   display: grid;
   place-items: center;
-  background: rgb(245 158 11 / 0.15);
-  color: #f59e0b;
   font-size: 1.2rem;
 }
 
 .public-home-cta {
-  background: rgb(15 23 42 / 0.75);
   border: 1px solid rgb(148 163 184 / 0.2);
-  color: #e2e8f0;
 }
 
 .public-home-cta .p-card-body {
@@ -495,13 +462,11 @@
 
 .public-home-cta h2 {
   margin: 0;
-  color: #fff;
 }
 
 .public-home-cta p,
 .public-home-cta small {
   margin: 0;
-  color: #cbd5e1;
 }
 
 .public-home-cta-actions {
