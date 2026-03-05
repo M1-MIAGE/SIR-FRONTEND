@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'primereact/button'
@@ -15,24 +14,16 @@ import { Message } from 'primereact/message'
 import { Tag } from 'primereact/tag'
 import { useAuth } from '@/app/providers/auth-context'
 import { organizerConcertApi } from '@/features/concert/api/organizer-concert.api'
-import type { CreateConcertRequestDto } from '@/features/concert/model/create-concert.types'
+import {
+  createConcertFormSchema,
+  type CreateConcertFormValues,
+  type CreateConcertRequestDto
+} from '@/features/concert/model/create-concert.types'
 import { placeApi } from '@/features/place/api/place.api'
 import type { PlaceDto } from '@/features/place/model/place.types'
 import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
 import PageContainer from '@/shared/ui/layout/PageContainer'
-
-const createConcertFormSchema = z.object({
-  title: z.string().trim().min(2, 'Titre requis (min 2 caracteres).'),
-  description: z.string().trim().min(2, 'Description requise (min 2 caracteres).'),
-  artist: z.string().trim().min(2, 'Artiste requis (min 2 caracteres).'),
-  date: z.date().refine((value) => !Number.isNaN(value.getTime()), 'Date et heure requises.'),
-  placeId: z.uuid('Lieu requis.'),
-  ticketUnitPrice: z.number().positive('Prix unitaire invalide.'),
-  ticketQuantity: z.number().int('Quantité invalide.').positive('Quantite invalide.'),
-})
-
-type CreateConcertFormValues = z.infer<typeof createConcertFormSchema>
 
 const defaultEventDate = (): Date => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
@@ -181,6 +172,7 @@ export default function OrganizerCreateConcertPage() {
         return
       }
 
+      console.error(error)
       navigate(ROUTES.errors.byCode(apiErrorCode), { replace: true })
     }
   })
