@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/app/providers/auth-context'
 import { ROUTES } from '@/shared/config/routes'
 
+/**
+ * Button that logs out the current user and redirects to login.
+ */
 export default function LogoutButton() {
   const navigate = useNavigate()
   const { logout } = useAuth()

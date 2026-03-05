@@ -16,6 +16,9 @@ const scrollToSection = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
+/**
+ * Public landing page entrypoint.
+ */
 export default function HomePage({ initialColorMode }: HomePageProps) {
   const navigate = useNavigate()
   const { isAuthenticated, role } = useAuth()

@@ -18,6 +18,11 @@ import OrganizerCreateConcertPage from '@/pages/organizer/OrganizerCreateConcert
 import OrganizerHomePage from '@/pages/organizer/OrganizerHomePage'
 import { ERROR_CODES, ROUTE_PATHS, ROUTE_SEGMENTS } from '@/shared/config/routes'
 
+/**
+ * Creates the application router with all public and protected routes.
+ *
+ * @param initialColorMode Color mode injected into layouts and home page.
+ */
 export const createAppRouter = (initialColorMode: ColorMode) =>
   createBrowserRouter([
     {

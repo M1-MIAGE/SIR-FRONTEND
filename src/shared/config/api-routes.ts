@@ -7,6 +7,11 @@ const API_SEGMENTS = {
   STATS: 'stats',
 } as const
 
+/**
+ * Backend API endpoint registry.
+ *
+ * Use these helpers instead of hard-coded paths in API clients.
+ */
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: `/${API_SEGMENTS.AUTH}/login`,
@@ -23,7 +28,17 @@ export const API_ENDPOINTS = {
     APPROVED: `/${API_SEGMENTS.CONCERTS}/approved`,
     PENDING: `/${API_SEGMENTS.CONCERTS}/pending`,
     REJECTED: `/${API_SEGMENTS.CONCERTS}/rejected`,
+    /**
+     * Endpoint used to validate a concert by its identifier.
+     *
+     * @param concertId Concert identifier.
+     */
     VALIDATE: (concertId: string): string => `/${API_SEGMENTS.CONCERTS}/${concertId}/validate`,
+    /**
+     * Endpoint used to reject a concert by its identifier.
+     *
+     * @param concertId Concert identifier.
+     */
     REJECT: (concertId: string): string => `/${API_SEGMENTS.CONCERTS}/${concertId}/reject`,
   },
   TICKETS: {

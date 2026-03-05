@@ -9,6 +9,9 @@ type CustomerHeaderProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Header variant used on customer routes.
+ */
 export default function CustomerHeader({ initialColorMode }: CustomerHeaderProps) {
   const navigate = useNavigate()
 

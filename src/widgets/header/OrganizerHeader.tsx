@@ -9,6 +9,9 @@ type OrganizerHeaderProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Header variant used on organizer routes.
+ */
 export default function OrganizerHeader({ initialColorMode }: OrganizerHeaderProps) {
   const navigate = useNavigate()
 

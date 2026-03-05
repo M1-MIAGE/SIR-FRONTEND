@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { ERROR_CODES } from '@/shared/config/routes'
 
+/**
+ * Union of error codes that can be displayed by the app.
+ */
 export type ApiErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES]
 
 const STATUS_TO_ERROR_CODE: Record<number, ApiErrorCode> = {
@@ -23,6 +26,12 @@ const STATUS_TO_ERROR_CODE: Record<number, ApiErrorCode> = {
   504: ERROR_CODES.GATEWAY_TIMEOUT,
 }
 
+/**
+ * Converts an unknown API error into a stable frontend error code.
+ *
+ * @param error Unknown error thrown by API calls.
+ * @returns A code compatible with {@link ERROR_CODES}.
+ */
 export const mapApiErrorCode = (error: unknown): ApiErrorCode => {
   if (!axios.isAxiosError(error)) {
     return ERROR_CODES.UNEXPECTED

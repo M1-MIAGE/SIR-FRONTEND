@@ -3,8 +3,14 @@ import { z } from 'zod'
 const isoDateTimeSchema = z.string().datetime({ offset: true })
 const nullableNumberSchema = z.number().nullable()
 
+/**
+ * Allowed aggregation levels for organizer statistics.
+ */
 export const statsGranularitySchema = z.enum(['DAY', 'WEEK', 'MONTH'])
 
+/**
+ * Query schema used by organizer stats endpoint.
+ */
 export const organizerConcertStatsQuerySchema = z.object({
   from: isoDateTimeSchema,
   to: isoDateTimeSchema,
@@ -13,6 +19,9 @@ export const organizerConcertStatsQuerySchema = z.object({
   includeConcerts: z.boolean().default(true),
 })
 
+/**
+ * Generic breakdown row schema (status, city, place).
+ */
 export const statsBreakdownRowSchema = z.object({
   key: z.string(),
   label: z.string(),
@@ -25,6 +34,9 @@ export const statsBreakdownRowSchema = z.object({
   sharePct: z.number(),
 })
 
+/**
+ * Timeline bucket schema used for charting trends.
+ */
 export const statsTimelineRowSchema = z.object({
   bucketStart: isoDateTimeSchema,
   bucketEnd: isoDateTimeSchema,
@@ -35,6 +47,9 @@ export const statsTimelineRowSchema = z.object({
   revenueGross: z.number(),
 })
 
+/**
+ * Ranking row schema used for top/worst concert rankings.
+ */
 export const statsRankingRowSchema = z.object({
   concertId: z.uuid(),
   concertTitle: z.string(),
@@ -47,6 +62,9 @@ export const statsRankingRowSchema = z.object({
   grossRevenue: z.number(),
 })
 
+/**
+ * Detailed concert row schema for optional per-concert exports.
+ */
 export const statsConcertRowSchema = z.object({
   concertId: z.uuid(),
   concertTitle: z.string(),
@@ -70,6 +88,9 @@ export const statsConcertRowSchema = z.object({
   daysUntilConcert: z.number(),
 })
 
+/**
+ * Full response schema returned by organizer statistics endpoint.
+ */
 export const organizerConcertStatsResponseSchema = z.object({
   generatedAt: isoDateTimeSchema,
   period: z.object({
@@ -114,10 +135,31 @@ export const organizerConcertStatsResponseSchema = z.object({
   concerts: z.array(statsConcertRowSchema).default([]),
 })
 
+/**
+ * DTO inferred from {@link statsGranularitySchema}.
+ */
 export type StatsGranularity = z.infer<typeof statsGranularitySchema>
+/**
+ * DTO inferred from {@link organizerConcertStatsQuerySchema}.
+ */
 export type OrganizerConcertStatsQueryDto = z.infer<typeof organizerConcertStatsQuerySchema>
+/**
+ * DTO inferred from {@link organizerConcertStatsResponseSchema}.
+ */
 export type OrganizerConcertStatsResponseDto = z.infer<typeof organizerConcertStatsResponseSchema>
+/**
+ * DTO inferred from {@link statsBreakdownRowSchema}.
+ */
 export type OrganizerStatsBreakdownRowDto = z.infer<typeof statsBreakdownRowSchema>
+/**
+ * DTO inferred from {@link statsTimelineRowSchema}.
+ */
 export type OrganizerStatsTimelineRowDto = z.infer<typeof statsTimelineRowSchema>
+/**
+ * DTO inferred from {@link statsRankingRowSchema}.
+ */
 export type OrganizerStatsRankingRowDto = z.infer<typeof statsRankingRowSchema>
+/**
+ * DTO inferred from {@link statsConcertRowSchema}.
+ */
 export type OrganizerStatsConcertRowDto = z.infer<typeof statsConcertRowSchema>

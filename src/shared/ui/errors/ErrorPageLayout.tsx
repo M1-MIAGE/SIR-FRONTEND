@@ -18,6 +18,9 @@ type ErrorPageLayoutProps = {
 
 const formatCodeLabel = (code: string): string => code.toUpperCase()
 
+/**
+ * Presentational layout used by error routes and error boundaries.
+ */
 export default function ErrorPageLayout({
   code,
   title,

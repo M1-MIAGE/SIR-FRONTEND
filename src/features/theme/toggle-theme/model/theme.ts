@@ -1,6 +1,9 @@
 import lightThemeUrl from 'primereact/resources/themes/lara-light-blue/theme.css?url'
 import darkThemeUrl from 'primereact/resources/themes/lara-dark-blue/theme.css?url'
 
+/**
+ * Color modes supported by the application theme switcher.
+ */
 export type ColorMode = 'light' | 'dark'
 
 const APP_THEME_LINK_ID = 'app-theme'
@@ -8,6 +11,9 @@ const APP_THEME_LINK_ID = 'app-theme'
 const getThemeUrl = (mode: ColorMode): string =>
   mode === 'dark' ? darkThemeUrl : lightThemeUrl
 
+/**
+ * Returns the initial color mode using OS preference when available.
+ */
 export const getInitialColorMode = (): ColorMode => {
   if (typeof window === 'undefined') {
     return 'dark'
@@ -18,6 +24,11 @@ export const getInitialColorMode = (): ColorMode => {
     : 'light'
 }
 
+/**
+ * Applies PrimeReact stylesheet and document metadata for the given mode.
+ *
+ * @param mode Target color mode.
+ */
 export const applyTheme = (mode: ColorMode): void => {
   if (typeof document === 'undefined') {
     return

@@ -26,6 +26,9 @@ const formatLocation = (row: AdminConcertModerationDto): string => {
   return combined.length > 0 ? combined : 'N/A'
 }
 
+/**
+ * Admin dashboard page for concert moderation workflows.
+ */
 export default function AdminHomePage() {
   const navigate = useNavigate()
 

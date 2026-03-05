@@ -10,6 +10,9 @@ import {
 
 type StatsSchemaStage = 'query' | 'response'
 
+/**
+ * Error thrown when organizer stats query or response fails schema validation.
+ */
 export class OrganizerStatsSchemaError extends Error {
   readonly stage: StatsSchemaStage
   readonly issues: ZodError['issues']
@@ -24,11 +27,23 @@ export class OrganizerStatsSchemaError extends Error {
   }
 }
 
+/**
+ * Type guard for {@link OrganizerStatsSchemaError}.
+ */
 export const isOrganizerStatsSchemaError = (
   value: unknown,
 ): value is OrganizerStatsSchemaError => value instanceof OrganizerStatsSchemaError
 
+/**
+ * Organizer statistics API client.
+ */
 export const organizerStatsApi = {
+  /**
+   * Retrieves statistics for concerts owned by the authenticated organizer.
+   *
+   * @param input Date range and options for aggregation.
+   * @throws {OrganizerStatsSchemaError} When query or response validation fails.
+   */
   async getMyConcertsStats(
     input: OrganizerConcertStatsQueryDto,
   ): Promise<OrganizerConcertStatsResponseDto> {

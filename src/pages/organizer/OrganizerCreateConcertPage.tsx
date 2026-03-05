@@ -27,6 +27,9 @@ import PageContainer from '@/shared/ui/layout/PageContainer'
 
 const defaultEventDate = (): Date => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
+/**
+ * Organizer page for creating new concerts.
+ */
 export default function OrganizerCreateConcertPage() {
   const navigate = useNavigate()
   const { user } = useAuth()

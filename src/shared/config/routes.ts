@@ -1,5 +1,8 @@
 import type { Role } from '@/entities/user/model/role'
 
+/**
+ * Atomic route segments used to build path constants.
+ */
 export const ROUTE_SEGMENTS = {
   DASHBOARD: 'dashboard',
   LOGIN: 'login',
@@ -13,6 +16,9 @@ export const ROUTE_SEGMENTS = {
   ERRORS: 'errors',
 } as const
 
+/**
+ * Centralized absolute route paths used by the router configuration.
+ */
 export const ROUTE_PATHS = {
   ROOT: '/',
   DASHBOARD: `/${ROUTE_SEGMENTS.DASHBOARD}`,
@@ -29,6 +35,9 @@ export const ROUTE_PATHS = {
   NOT_FOUND: '*',
 } as const
 
+/**
+ * Error codes supported by the app error page.
+ */
 export const ERROR_CODES = {
   BAD_REQUEST: '400',
   UNAUTHORIZED: '401',
@@ -54,15 +63,46 @@ export const ERROR_CODES = {
 type KnownErrorCode = (typeof ERROR_CODES)[keyof typeof ERROR_CODES]
 type ErrorCodeInput = KnownErrorCode | `${number}`
 
+/**
+ * Route factory helpers to avoid hard-coded URLs in components.
+ */
 export const ROUTES = {
+  /**
+   * Home page route.
+   */
   root: (): string => ROUTE_PATHS.ROOT,
+  /**
+   * Role dispatching dashboard route.
+   */
   dashboard: (): string => ROUTE_PATHS.DASHBOARD,
+  /**
+   * Login page route.
+   */
   login: (): string => ROUTE_PATHS.LOGIN,
+  /**
+   * Register page route.
+   */
   register: (): string => ROUTE_PATHS.REGISTER,
+  /**
+   * Organizer concert creation route.
+   */
   organizerCreateConcert: (): string => ROUTE_PATHS.ORGANIZER_CONCERT_CREATE,
+  /**
+   * Customer tickets route.
+   */
   customerTickets: (): string => ROUTE_PATHS.CUSTOMER_TICKETS,
+  /**
+   * Customer concert details route by concert id.
+   *
+   * @param concertId Concert identifier.
+   */
   customerConcertDetails: (concertId: string): string =>
     `/${ROUTE_SEGMENTS.CUSTOMER}/${ROUTE_SEGMENTS.CONCERTS}/${concertId}`,
+  /**
+   * Landing route for a given role.
+   *
+   * @param role Current authenticated user role.
+   */
   roleHome: (role: Role): string => {
     if (role === 'CUSTOMER') {
       return ROUTE_PATHS.CUSTOMER_HOME
@@ -75,15 +115,44 @@ export const ROUTES = {
     return ROUTE_PATHS.ADMIN_HOME
   },
   errors: {
+    /**
+     * Error index route.
+     */
     root: (): string => ROUTE_PATHS.ERRORS_ROOT,
+    /**
+     * Error detail route for any known or numeric code.
+     *
+     * @param code Error code to display.
+     */
     byCode: (code: ErrorCodeInput): string => `${ROUTE_PATHS.ERRORS_ROOT}/${code}`,
+    /**
+     * Shortcut for 401 page.
+     */
     unauthorized: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.UNAUTHORIZED}`,
+    /**
+     * Shortcut for 403 page.
+     */
     forbidden: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.FORBIDDEN}`,
+    /**
+     * Shortcut for 404 page.
+     */
     notFound: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.NOT_FOUND}`,
+    /**
+     * Shortcut for 500 page.
+     */
     internal: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.INTERNAL}`,
+    /**
+     * Shortcut for 503 page.
+     */
     serviceUnavailable: (): string =>
       `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.SERVICE_UNAVAILABLE}`,
+    /**
+     * Shortcut for offline state page.
+     */
     offline: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.OFFLINE}`,
+    /**
+     * Shortcut for generic unexpected errors.
+     */
     unexpected: (): string => `${ROUTE_PATHS.ERRORS_ROOT}/${ERROR_CODES.UNEXPECTED}`,
   },
 } as const

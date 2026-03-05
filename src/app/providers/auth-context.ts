@@ -4,6 +4,9 @@ import type { Role } from '@/entities/user/model/role'
 import type { AppUser } from '@/entities/user/model/user'
 import type { ApiErrorCode } from '@/shared/api/map-api-error'
 
+/**
+ * Contract exposed by authentication context.
+ */
 export type AuthContextValue = {
   user: AppUser | null
   role: Role | null
@@ -16,8 +19,16 @@ export type AuthContextValue = {
   logout: () => Promise<void>
 }
 
+/**
+ * React context storing current authentication state and actions.
+ */
 export const AuthContext = createContext<AuthContextValue | null>(null)
 
+/**
+ * Hook to access the current authentication context.
+ *
+ * @throws {Error} When used outside {@link AuthProvider}.
+ */
 export const useAuth = (): AuthContextValue => {
   const contextValue = useContext(AuthContext)
 

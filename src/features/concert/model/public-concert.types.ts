@@ -1,5 +1,8 @@
 import { z } from 'zod'
 
+/**
+ * Runtime schema of a public concert row enriched with place details.
+ */
 export const publicConcertPlaceSchema = z.object({
   concertId: z.uuid(),
   concertTitle: z.string().min(1),
@@ -14,6 +17,12 @@ export const publicConcertPlaceSchema = z.object({
   ticketUnitPrice: z.number().nonnegative(),
 })
 
+/**
+ * Runtime schema for public concert list responses.
+ */
 export const publicConcertPlacesSchema = z.array(publicConcertPlaceSchema)
 
+/**
+ * DTO inferred from {@link publicConcertPlaceSchema}.
+ */
 export type PublicConcertPlaceDto = z.infer<typeof publicConcertPlaceSchema>

@@ -1,3 +1,6 @@
+/**
+ * Severity tokens consumed by UI tags and alerts.
+ */
 export type ErrorTagSeverity =
   | 'success'
   | 'info'
@@ -6,6 +9,9 @@ export type ErrorTagSeverity =
   | 'secondary'
   | 'contrast'
 
+/**
+ * Base metadata displayed on error pages.
+ */
 type ErrorDefinition = {
   title: string
   message: string
@@ -13,6 +19,9 @@ type ErrorDefinition = {
   severity: ErrorTagSeverity
 }
 
+/**
+ * Error metadata resolved with the final normalized code.
+ */
 export type ResolvedErrorDefinition = ErrorDefinition & {
   code: string
 }
@@ -160,6 +169,11 @@ const HTTP_STATUS_PATTERN = /^\d{3}$/
 const normalizeErrorCode = (rawCode?: string): string =>
   rawCode?.trim().toLowerCase() || 'unexpected'
 
+/**
+ * Resolves a raw API or route error code to display metadata.
+ *
+ * @param rawCode Raw error code value (HTTP-like or custom string).
+ */
 export const resolveErrorDefinition = (rawCode?: string): ResolvedErrorDefinition => {
   const code = normalizeErrorCode(rawCode)
   const predefinedError = ERROR_CATALOG[code]

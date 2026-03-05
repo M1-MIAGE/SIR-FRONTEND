@@ -9,6 +9,9 @@ type AppErrorBoundaryState = {
   hasError: boolean
 }
 
+/**
+ * Global React error boundary for uncaught rendering errors.
+ */
 export default class AppErrorBoundary extends Component<
   AppErrorBoundaryProps,
   AppErrorBoundaryState

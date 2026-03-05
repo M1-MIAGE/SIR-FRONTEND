@@ -6,6 +6,9 @@ type PageContainerProps = PropsWithChildren<{
   actions?: ReactNode
 }>
 
+/**
+ * Shared page layout wrapper with title, subtitle and action slot.
+ */
 export default function PageContainer({
   title,
   subtitle,

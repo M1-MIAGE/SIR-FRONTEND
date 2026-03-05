@@ -68,6 +68,9 @@ const toConcertCard = (concert: PublicConcertPlaceDto): ConcertCard => {
   }
 }
 
+/**
+ * Reusable landing sections for both public and customer-facing home views.
+ */
 export default function ConcertLandingSections({ mode }: ConcertLandingSectionsProps) {
   const navigate = useNavigate()
   const { isAuthenticated, role } = useAuth()

@@ -9,6 +9,9 @@ type ThemeToggleProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * UI toggle to switch between light and dark color modes.
+ */
 export default function ThemeToggle({ initialColorMode }: ThemeToggleProps) {
   const [mode, setMode] = useState<ColorMode>(initialColorMode)
   const isDark = mode === 'dark'

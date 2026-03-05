@@ -7,6 +7,9 @@ type AdminLayoutProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Root layout for admin pages.
+ */
 export default function AdminLayout({ initialColorMode }: AdminLayoutProps) {
   return (
     <div className="role-shell">

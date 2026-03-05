@@ -22,6 +22,9 @@ const roleOptions = [
 
 type RegisterFormValues = CreateUserRequestDto
 
+/**
+ * Public registration page.
+ */
 export default function RegisterPage() {
   const navigate = useNavigate()
   const { register: registerAccount, isAuthenticated, isLoading } = useAuth()

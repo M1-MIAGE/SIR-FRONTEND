@@ -4,6 +4,11 @@ import { env } from '@/shared/config/env'
 import { authTokenStore } from '@/shared/auth/token-store'
 import { API_ENDPOINTS } from '@/shared/config/api-routes'
 
+/**
+ * Shared Axios instance configured for API requests.
+ *
+ * It injects bearer tokens on protected routes and retries once after token refresh on 401 responses.
+ */
 export const http = axios.create({
   baseURL: env.apiBaseUrl,
   timeout: 15000,
@@ -25,6 +30,9 @@ type RetryableRequestConfig = InternalAxiosRequestConfig & {
 
 let refreshPromise: Promise<void> | null = null
 
+/**
+ * Resolves a request URL to its pathname for endpoint matching.
+ */
 const normalizeRequestPath = (url: string | undefined, baseURL: string | undefined): string | null => {
   if (!url) {
     return null
@@ -37,11 +45,17 @@ const normalizeRequestPath = (url: string | undefined, baseURL: string | undefin
   }
 }
 
+/**
+ * Determines if a request should skip auth headers and refresh logic.
+ */
 const isAuthExcludedPath = (config: Pick<InternalAxiosRequestConfig, 'url' | 'baseURL'>): boolean => {
   const requestPath = normalizeRequestPath(config.url, config.baseURL ?? env.apiBaseUrl)
   return Boolean(requestPath && AUTH_EXCLUDED_PATHS.has(requestPath))
 }
 
+/**
+ * Serializes token refresh so concurrent 401 responses share a single refresh request.
+ */
 const runRefresh = async (): Promise<void> => {
   if (!refreshPromise) {
     refreshPromise = http

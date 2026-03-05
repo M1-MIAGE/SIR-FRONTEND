@@ -17,6 +17,9 @@ const isServerOrUnavailableError = (code: string): boolean => {
   return Number.isInteger(numericCode) && numericCode >= 500
 }
 
+/**
+ * Route-level error page resolving status code to user-facing content.
+ */
 export default function ErrorPage({ forcedStatusCode }: ErrorPageProps) {
   const { statusCode } = useParams<{ statusCode: string }>()
   const navigate = useNavigate()

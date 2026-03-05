@@ -11,6 +11,9 @@ if (!parsedEnv.success) {
   throw new Error('Invalid environment variables')
 }
 
+/**
+ * Typed and validated runtime environment configuration.
+ */
 export const env = {
   apiBaseUrl: parsedEnv.data.VITE_API_BASE_URL,
 } as const

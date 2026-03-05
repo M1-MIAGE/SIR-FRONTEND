@@ -5,6 +5,9 @@ type AppLoaderProps = {
   label?: string
 }
 
+/**
+ * Full-page loading indicator for async route bootstrapping.
+ */
 export default function AppLoader({ label = 'Chargement...' }: AppLoaderProps) {
   return (
     <section className="app-loader">

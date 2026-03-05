@@ -7,6 +7,9 @@ type OrganizerLayoutProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Root layout for organizer pages.
+ */
 export default function OrganizerLayout({ initialColorMode }: OrganizerLayoutProps) {
   return (
     <div className="role-shell">

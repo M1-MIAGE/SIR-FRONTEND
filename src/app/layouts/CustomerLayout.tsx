@@ -7,6 +7,9 @@ type CustomerLayoutProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Root layout for customer pages.
+ */
 export default function CustomerLayout({ initialColorMode }: CustomerLayoutProps) {
   return (
     <div className="role-shell">

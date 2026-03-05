@@ -3,6 +3,9 @@ import { useAuth } from '@/app/providers/auth-context'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
 import AppLoader from '@/shared/ui/layout/AppLoader'
 
+/**
+ * Redirect route that sends an authenticated user to its role home.
+ */
 export default function RoleHomeRedirect() {
   const { isAuthenticated, isLoading, role, bootstrapErrorCode } = useAuth()
 

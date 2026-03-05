@@ -7,6 +7,9 @@ type StackedCardSkeletonProps = {
   className?: string
 }
 
+/**
+ * Generic stacked skeleton card used while loading page sections.
+ */
 export default function StackedCardSkeleton({
   titleWidth = '14rem',
   tailWidth = '75%',

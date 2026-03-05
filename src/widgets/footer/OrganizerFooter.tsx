@@ -1,5 +1,8 @@
 import { Toolbar } from 'primereact/toolbar'
 
+/**
+ * Footer displayed on organizer pages.
+ */
 export default function OrganizerFooter() {
   return (
     <footer className="role-footer role-footer--organizer">

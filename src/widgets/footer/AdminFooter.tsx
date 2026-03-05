@@ -1,5 +1,8 @@
 import { Toolbar } from 'primereact/toolbar'
 
+/**
+ * Footer displayed on admin pages.
+ */
 export default function AdminFooter() {
   return (
     <footer className="role-footer role-footer--admin">

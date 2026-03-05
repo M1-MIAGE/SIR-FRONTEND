@@ -6,6 +6,9 @@ import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTE_PATHS } from '@/shared/config/routes'
 import type { AppUser } from '@/entities/user/model/user'
 
+/**
+ * Initializes and provides authentication state for the entire application tree.
+ */
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<AppUser | null>(null)
   const [isLoading, setIsLoading] = useState(true)

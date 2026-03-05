@@ -9,6 +9,9 @@ type AdminHeaderProps = {
   initialColorMode: ColorMode
 }
 
+/**
+ * Header variant used on admin routes.
+ */
 export default function AdminHeader({ initialColorMode }: AdminHeaderProps) {
   const navigate = useNavigate()
 

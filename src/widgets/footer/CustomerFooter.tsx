@@ -1,5 +1,8 @@
 import { Toolbar } from 'primereact/toolbar'
 
+/**
+ * Footer displayed on customer pages.
+ */
 export default function CustomerFooter() {
   return (
     <footer className="role-footer role-footer--customer">

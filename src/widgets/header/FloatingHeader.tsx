@@ -13,6 +13,9 @@ type FloatingHeaderProps = {
   actionSlot?: ReactNode
 }
 
+/**
+ * Shared top navigation shell used by home and role-specific headers.
+ */
 export default function FloatingHeader({
   brand,
   menuItems,

@@ -40,6 +40,9 @@ const availabilityLabel = (availablePlaces: number): string => {
   return 'Disponible'
 }
 
+/**
+ * Customer page showing one concert details and ticket purchase flow.
+ */
 export default function CustomerConcertDetailsPage() {
   const navigate = useNavigate()
   const location = useLocation()

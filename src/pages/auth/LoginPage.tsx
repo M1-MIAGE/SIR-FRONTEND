@@ -21,6 +21,9 @@ type LoginLocationState = {
 
 type LoginFormValues = LoginRequestDto
 
+/**
+ * Public login page.
+ */
 export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()

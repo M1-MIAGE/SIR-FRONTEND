@@ -18,6 +18,11 @@ const backendAdminConcertModerationSchema = z.object({
   organizerLastName: z.string().nullable().optional(),
 })
 
+/**
+ * Normalized schema used by admin moderation screens.
+ *
+ * It also handles the backend typo `organizerFistName` for compatibility.
+ */
 export const adminConcertModerationSchema = backendAdminConcertModerationSchema.transform((value) => ({
   concertId: value.concertId,
   concertTitle: value.concertTitle,
@@ -33,8 +38,14 @@ export const adminConcertModerationSchema = backendAdminConcertModerationSchema.
   organizerLastName: value.organizerLastName ?? null,
 }))
 
+/**
+ * Runtime schema for moderation list responses.
+ */
 export const adminConcertModerationListSchema = z.array(adminConcertModerationSchema)
 
+/**
+ * Runtime schema for a single concert after moderation actions.
+ */
 export const concertDetailsSchema = z.object({
   id: z.uuid(),
   title: z.string().min(1),
@@ -48,5 +59,11 @@ export const concertDetailsSchema = z.object({
   updatedAt: isoDateTimeSchema,
 })
 
+/**
+ * DTO inferred from {@link adminConcertModerationSchema}.
+ */
 export type AdminConcertModerationDto = z.infer<typeof adminConcertModerationSchema>
+/**
+ * DTO inferred from {@link concertDetailsSchema}.
+ */
 export type ConcertDetailsDto = z.infer<typeof concertDetailsSchema>

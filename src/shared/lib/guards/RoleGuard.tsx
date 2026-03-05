@@ -9,6 +9,9 @@ type RoleGuardProps = PropsWithChildren<{
   allow: Role[]
 }>
 
+/**
+ * Route guard that enforces authentication and role-based access.
+ */
 export default function RoleGuard({ allow, children }: RoleGuardProps) {
   const { isAuthenticated, isLoading, role, bootstrapErrorCode } = useAuth()
 

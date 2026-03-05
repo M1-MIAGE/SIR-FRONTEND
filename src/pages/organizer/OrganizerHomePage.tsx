@@ -117,6 +117,9 @@ const statusSeverity = (status: string): 'success' | 'warning' | 'danger' | 'inf
     return 'info'
 }
 
+/**
+ * Organizer dashboard page with statistics, rankings and filters.
+ */
 export default function OrganizerHomePage() {
     const navigate = useNavigate()
 

@@ -30,6 +30,9 @@ const formatPlace = (ticket: CustomerTicketDto): string => {
   return city ? `${name} (${city})` : name
 }
 
+/**
+ * Customer page listing purchased tickets and barcode details.
+ */
 export default function CustomerTicketsPage() {
   const navigate = useNavigate()
 
