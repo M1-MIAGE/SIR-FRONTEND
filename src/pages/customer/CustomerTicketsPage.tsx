@@ -7,7 +7,6 @@ import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { Dialog } from 'primereact/dialog'
 import { Message } from 'primereact/message'
-import { Skeleton } from 'primereact/skeleton'
 import { Tag } from 'primereact/tag'
 import { ticketApi } from '@/features/ticket/api/ticket.api'
 import type { CustomerTicketDto } from '@/features/ticket/model/ticket.types'
@@ -15,6 +14,7 @@ import { mapApiErrorCode } from '@/shared/api/map-api-error'
 import { ERROR_CODES, ROUTES } from '@/shared/config/routes'
 import { currencyFormatter, dateTimeFormatter, numberFormatter } from '@/shared/lib/formatters'
 import PageContainer from '@/shared/ui/layout/PageContainer'
+import StackedCardSkeleton from '@/shared/ui/primereact/StackedCardSkeleton'
 import {rowsPerPageOptions} from "@/shared/lib/table.ts";
 
 const isUpcomingConcert = (concertDate: string): boolean => new Date(concertDate).getTime() >= Date.now()
@@ -74,6 +74,29 @@ export default function CustomerTicketsPage() {
     [navigate],
   )
 
+  const renderBarcode = useCallback(() => {
+    if (!barcodeDialogTicket || !barcodeSvgRef.current) return
+
+    try {
+      barcodeSvgRef.current.innerHTML = ''
+
+      JsBarcode(barcodeSvgRef.current, barcodeDialogTicket.ticketBarcode, {
+        format: 'CODE128',
+        width: 2,
+        height: 96,
+        margin: 8,
+        displayValue: true,
+        fontSize: 16,
+        lineColor: '#111827',
+        background: '#ffffff',
+      })
+
+      setBarcodeRenderError(null)
+    } catch {
+      setBarcodeRenderError('Impossible de generer le code-barres pour ce ticket.')
+    }
+  }, [barcodeDialogTicket])
+
   useEffect(() => {
     void loadTickets(true)
   }, [loadTickets])
@@ -105,14 +128,7 @@ export default function CustomerTicketsPage() {
         {apiError ? <Message severity="warn" text={`Erreur API tickets: ${apiError}`} /> : null}
 
         {isLoading ? (
-          <Card>
-            <div className="stack">
-              <Skeleton height="2rem" width="14rem" />
-              <Skeleton height="1rem" width="100%" />
-              <Skeleton height="1rem" width="100%" />
-              <Skeleton height="1rem" width="75%" />
-            </div>
-          </Card>
+          <StackedCardSkeleton titleWidth="14rem" tailWidth="75%" />
         ) : (
           <>
             <section className="customer-ticket-kpi-grid">
@@ -198,29 +214,8 @@ export default function CustomerTicketsPage() {
           visible={Boolean(barcodeDialogTicket)}
           style={{ width: 'min(92vw, 38rem)' }}
           modal
-          onShow={() => {
-            if (!barcodeDialogTicket || !barcodeSvgRef.current) return
-
-            try {
-              // Nettoyer le SVG au cas où
-              barcodeSvgRef.current.innerHTML = ''
-
-              JsBarcode(barcodeSvgRef.current, barcodeDialogTicket.ticketBarcode ?? 'HELLO', {
-                format: 'CODE128',
-                width: 2,
-                height: 96,
-                margin: 8,
-                displayValue: true,
-                fontSize: 16,
-                lineColor: '#111827',
-                background: '#ffffff',
-              })
-
-              setBarcodeRenderError(null)
-            } catch (e) {
-              setBarcodeRenderError('Impossible de generer le code-barres pour ce ticket.')
-            }
-          }}
+          dismissableMask
+          onShow={renderBarcode}
           onHide={() => {
             setBarcodeDialogTicket(null)
             setBarcodeRenderError(null)
